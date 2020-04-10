@@ -3,12 +3,185 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+
+    <title>Home Page</title>
+
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
+
   </head>
   <body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <h1 class="title is-1">Entertain Me!</h1>
+        </a>
+    
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Home
+          </a>
+    
+          <a class="navbar-item">
+            My List
+          </a>
+    
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Entertainment
+            </a>
+    
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                Movies
+              </a>
+              <a class="navbar-item">
+                TV Shows
+              </a>
+              <a class="navbar-item">
+                Books
+              </a>
+            </div>
+          </div>
+        </div>
+    
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field has-addons has-addons-centered">
+              <p class="control">
+                <span class="select">
+                  <select>
+                    <option>Movies</option>
+                    <option>TV Shows</option>
+                    <option>Books</option>
+                  </select>
+                </span>
+              </p>
+              <p class="control">
+                <input class="input" type="text" placeholder="Search for content">
+              </p>
+              <p class="control">
+                <a class="button is-primary">
+                  <i class="fas fa-search"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+  <div class="container" id="main-content">
+    <div class="columns">
+        <div class="column">
+          <a href="#">
+            <div class="card">
+              <div class="card-content">
+                <img src="http://www.fillmurray.com/460/300">
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <span>
+                    Browse your fav movies
+                  </span>
+                </p>
+              </footer>
+            </div>
+          </a>
+        </div>
+        <div class="column">
+          <a href="#">
+            <div class="card">
+              <div class="card-content">
+                <img src="http://www.fillmurray.com/460/300">
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <span>
+                    Browse your fav movies
+                  </span>
+                </p>
+              </footer>
+            </div>
+          </a>
+        </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <a href="#">
+          <div class="card">
+            <div class="card-content">
+              <img src="http://www.fillmurray.com/460/300">
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                  Browse your fav movies
+                </span>
+              </p>
+            </footer>
+          </div>
+        </a>
+      </div>
+      <div class="column">
+        <a href="#">
+          <div class="card">
+            <div class="card-content">
+              <img src="http://www.fillmurray.com/460/300">
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                  Browse your fav movies
+                </span>
+              </p>
+            </footer>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
+
+
+
+
+      <script>
+        // event listener for hamburger menu - when user clicks it it drops down and vice versa
+        $(document).ready(function () {
+          var $navbarBurgers = $(".navbar-burger")
+
+          $navbarBurgers.each(function () {
+            $(this).on("click", function () {
+
+              // targets data-target attribute which is equal to regular nav bar menu's ID
+              var targetAttribute = $(this).attr("data-target");
+              var $navbarMenuID = $("#" + targetAttribute);
+
+              // toggles active class between regular navbar menu and hamburger menu
+              $(this).toggleClass("is-active");
+              $navbarMenuID.toggleClass("is-active");
+            })
+          })
+        });
+      </script>
   </body>
 </html>
