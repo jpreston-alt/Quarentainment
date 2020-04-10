@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Home Page</title>
+    <title>My List</title>
 
     <link rel="stylesheet" href="./assets/css/reset.css" />
 
@@ -26,7 +26,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item">
-                <h1 class="title is-1">Entertain Me!</h1>
+                <h1 class="title is-4">Entertain Me!</h1>
             </a>
 
             <!-- Hamburger -->
@@ -49,7 +49,7 @@
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        Entertainment
+                        Browse
                     </a>
                     <div class="navbar-dropdown">
                         <a class="navbar-item" href="browse.html">
@@ -65,8 +65,101 @@
                 </div>
             </div>
         </div>
-
     </nav>
+
+    <section class="hero has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1">
+                    My List
+                </h1>
+                <p class="menu-label">
+                    Filter by:
+                </p>
+                <h2 class="subtitle"></h2>
+                <div class="field has-addons has-addons-centered">
+                    <p class="control">
+                        <span class="select">
+                            <select>
+                                <option>Movies</option>
+                                <option>TV Shows</option>
+                                <option>Books</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="my-list-container">
+        <div class="container browse-content-card">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content columns is-mobile">
+                            <div class="column">
+                                <img src="https://via.placeholder.com/320x480">
+                            </div>
+                            <div class="column">
+                                <p class="title">Title</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <a class="watched-btn">
+                                    Mark as Watched
+                                </a>
+                            </p>
+                            <p class="card-footer-item">
+                                <a class="remove-btn">
+                                    Remove from List
+                                </a>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content columns is-mobile">
+                            <div class="column">
+                                <img src="https://via.placeholder.com/320x480">
+                            </div>
+                            <div class="column">
+                                <p class="title">Title</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <a class="watched-btn"> 
+                                    Mark as Watched
+                                </a>
+                            </p>
+                            <p class="card-footer-item">
+                                <a class="remove-btn">
+                                    Remove from List
+                                </a>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>

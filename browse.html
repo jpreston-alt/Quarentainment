@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Home Page</title>
+    <title>Browse Entertainment</title>
 
     <link rel="stylesheet" href="./assets/css/reset.css" />
 
@@ -26,7 +26,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item">
-                <h1 class="title is-1">Entertain Me!</h1>
+                <h1 class="title is-4">Entertain Me!</h1>
             </a>
 
             <!-- Hamburger -->
@@ -49,7 +49,7 @@
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        Entertainment
+                        Browse
                     </a>
                     <div class="navbar-dropdown">
                         <a class="navbar-item" href="browse.html">
@@ -67,12 +67,16 @@
         </div>
     </nav>
 
-    <div class="container has-text-centered">
-        <div class="columns">
-            <div class="column">
-                <h3 class="title is-3">
-                    Top Trending <span id="media-type">Movies</span> of the <span id="time-frame">Week</span>
-                </h3>
+    <section class="hero has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1">
+                    Trending <span id="media-type">Movies</span> of the Week               
+                </h1>
+                <p class="menu-label">
+                    Or Search for Content:
+                </p>
+                <h2 class="subtitle"></h2>
                 <div class="field has-addons has-addons-centered">
                     <p class="control">
                         <span class="select">
@@ -84,18 +88,18 @@
                         </span>
                     </p>
                     <p class="control">
-                        <input class="input" type="text" placeholder="Search for content">
+                        <input class="input" type="text" placeholder="Title, genre, actor">
                     </p>
                     <p class="control">
                         <a class="button is-primary">
                             <i class="fas fa-search"></i>
                         </a>
                     </p>
-                </div>       
+                </div>
+
             </div>
         </div>
-    </div>
-
+    </section>
 
     <div class="container" id="browse-content-container">
         <div class="container browse-content-card">
@@ -115,7 +119,7 @@
                             </div>                             
                         </div>
                         <footer class="card-footer">
-                            <a href="#" class="card-footer-item save-to-list-btn">Save to My List</a>
+                            <a href="#" class="card-footer-item add-to-list-btn">Add to My List</a>
                         </footer>
                     </div>
                 </div>
@@ -134,7 +138,7 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="#" class="card-footer-item save-to-list-btn">Save to My List</a>
+                            <a href="#" class="card-footer-item add-to-list-btn">Add to My List</a>
                         </footer>
                     </div>
                 </div>
