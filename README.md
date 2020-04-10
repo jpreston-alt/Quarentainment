@@ -1,3 +1,3 @@
 # Project-1
 
-Steaming Content
+Streaming Content
