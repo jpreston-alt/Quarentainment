@@ -1,5 +1,7 @@
-// event listener for hamburger menu - when user clicks it it drops down and vice versa
+
 $(document).ready(function () {
+
+    // event listener for hamburger menu - when user clicks it it drops down and vice versa
     var $navbarBurgers = $(".navbar-burger")
 
     $navbarBurgers.each(function () {
@@ -14,4 +16,11 @@ $(document).ready(function () {
             $navbarMenuID.toggleClass("is-active");
         })
     })
+
+    $(".nav-to-books").on("click", function(event) {
+        event.preventDefault();
+        console.log("clicked books")
+        $("#media-type").text("Books");
+    })
+
 });
