@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Browse Entertainment</title>
+
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+
+    <!-- Add Bulma -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+</head>
+
+<body>
+
+    <!-- NavBar  -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <h1 class="title is-4">Entertain Me!</h1>
+            </a>
+
+            <!-- Hamburger -->
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <!-- Full Width Navbar -->
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="index.html">
+                    Home
+                </a>
+                <a class="navbar-item" href="user-list.html">
+                    My List
+                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Browse
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item nav-to-movies" href="browse.html">
+                            Movies
+                        </a>
+                        <a class="navbar-item nav-to-shows" href="browse.html">
+                            TV Shows
+                        </a>
+                        <a class="navbar-item nav-to-books" href="browse.html">
+                            Books
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1">
+                    Trending <span id="media-type">Movies</span> of the Week               
+                </h1>
+                <p class="menu-label">
+                    Or Search for Content:
+                </p>
+                <h2 class="subtitle"></h2>
+                <div class="field has-addons has-addons-centered">
+                    <p class="control">
+                        <span class="select">
+                            <select>
+                                <option>Movies</option>
+                                <option>TV Shows</option>
+                                <option>Books</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p class="control">
+                        <input class="input" type="text" placeholder="Title, genre, actor">
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="browse-content-container">
+        <div class="container browse-content-card">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content columns is-mobile">
+                            <div class="column">
+                                <img src="https://via.placeholder.com/320x480">
+                            </div>
+                            <div class ="column">
+                                <p class="title">Title</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                            </div>                             
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item add-to-list-btn">Add to My List</a>
+                        </footer>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content columns is-mobile">
+                            <div class="column">
+                                <img src="https://via.placeholder.com/320x480">
+                            </div>
+                            <div class="column">
+                                <p class="title">Title</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                                <p class="subtitle">info</p>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item add-to-list-btn">Add to My List</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>
