@@ -20,7 +20,7 @@
 
 </head>
 
-<body>
+<body class="browse-page">
 
     <!-- NavBar  -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -70,26 +70,24 @@
     <section class="hero has-text-centered">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title is-1">
-                    Trending <span id="media-type">Movies</span> of the Week               
-                </h1>
+                <h1 class="title is-1" id="media-type"></h1>
                 <p class="menu-label">
-                    Or Search for Content:
+                    Filter by Genre:
                 </p>
                 <h2 class="subtitle"></h2>
                 <div class="field has-addons has-addons-centered">
                     <p class="control">
                         <span class="select">
-                            <select>
-                                <option>Movies</option>
+                            <select id="media-dropdown">
+                                <!-- <option>Movies</option>
                                 <option>TV Shows</option>
-                                <option>Books</option>
+                                <option>Books</option> -->
                             </select>
                         </span>
                     </p>
-                    <p class="control">
+                    <!-- <p class="control">
                         <input class="input" type="text" placeholder="Title, genre, actor">
-                    </p>
+                    </p> -->
                     <p class="control">
                         <a class="button is-primary">
                             <i class="fas fa-search"></i>
