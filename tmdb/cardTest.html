@@ -4,10 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test TMDB</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
+    <form id="movie-form">
+        <label for="movie-input">Search for a movie</label>
+        <input type="text" id="movie-input"><br>
+
+        <input id="find-movie" type="submit" value="Movie Search">
+      </form>
+  
+      <div id="movie-view"></div>
+
     <script>
-        
+        $("#find-movie").on("click", function(event) {
+
+
+        event.preventDefault();
+
+        var movie = $("#movie-input").val();
+
+        var queryTMDB = "https://api.themoviedb.org/3/search/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&query=" + movie
+        $.ajax({
+          url: queryTMDB,
+          method: "GET"
+        }).then(function(response) {
+            console.log(response);
+
+            var movieDiv = $("<div class='movie'>");
+
+            // title
+            var mTitle = response.results[0].title;
+            var title = $("<h1>").text(mTitle);
+            movieDiv.append(title);
+
+            // score
+            var score = $("<p>").text(response.results[0].vote_average)
+            movieDiv.append(score)
+
+            var genre = $("<p>").text(response.results[0].genre_ids[0])
+            movieDiv.append(genre)
+
+            var mOverview = $("<p>").text(response.results[0].overview)
+            movieDiv.append(mOverview)
+
+            var pic = response.results[0].poster_path
+            var image = $("<img>").attr("src", "https://image.tmdb.org/t/p/w500" + pic)
+            movieDiv.append(image);
+
+
+            $("#movie-view").prepend(movieDiv);
+            // $("#movie-view").text(JSON.stringify(response.results[0].overview));
+        });
+        });
     </script>
     
 </body>
