@@ -1,46 +1,28 @@
 $(document).ready(function () {
-  var tmdbApiKey = "53fb3173ef10002db2f58ad55ccf032e";
-  var tmdbQueryUrl =
-    "https://api.themoviedb.org/3/movie/550?api_key=" + tmdbApiKey;
-
   var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
-  var nytBooksUrl = "https://api.nytimes.com/svc/books/v3";
-  var nytBookListsUrl = nytBooksUrl + "/lists/names.json?api-key=" + nytApiKey;
+  var nytMoviesUrl = "https://api.nytimes.com/svc/movies/v2";
+  var nytMovieListUrl =
+    nytMoviesUrl + "/reviews/picks.json?api-key=" + nytApiKey;
 
   $.ajax({
-    url: nytBookListsUrl,
+    url: nytMovieListUrl,
     method: "GET",
   }).then(function (response) {
+    console.log(response);
     for (i = 0; i < response.results.length; i++) {
-      var listName = response.results[i].display_name;
-      var listItem = $("<li>").text(listName);
-      $("#bookLists").append(listItem);
+      var divMovie = $("<p>").html(
+        response.results[i].display_title +
+          "<br />" +
+          response.results[i].mpaa_rating +
+          "<br /><img src = '" +
+          response.results[i].multimedia.src +
+          "'><br/><a href='" +
+          response.results[i].link.url +
+          "'>Read the Review</a><br/>" +
+          response.results[i].summary_short +
+          "<br/>"
+      );
+      $("#movieList").append(divMovie);
     }
-
-    var listSelection = "hardcover-political-books";
-
-    $("#bookLists").click(function () {
-      var nytBookTitlesUrl =
-        nytBooksUrl +
-        "/lists/current/" +
-        listSelection +
-        "?api-key=" +
-        nytApiKey;
-      $.ajax({
-        url: nytBookTitlesUrl,
-        method: "GET",
-      }).then(function (bookResponse) {
-        console.log(bookResponse.results.books.length);
-        for (j = 0; j < bookResponse.results.books.length; j++) {
-          console.log(j);
-          var bookName = bookResponse.results.books[j].title;
-          console.log(bookName);
-          var bookItem = $("<li>").text(bookName);
-          $("#bookTitles").append(bookItem);
-        }
-      });
-    });
   });
-
-  var nytMovies = "https://api.nytimes.com/svc/movies/v2";
 });
