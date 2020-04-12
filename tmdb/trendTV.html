@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending TV</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="movie-view"></div>
+    <script>
+        var tQuery = "https://api.themoviedb.org/3/trending/all/day?api_key=660bf8330423e5658590b1cdb677dc08"
+
+        $.ajax({
+            url: tQuery,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response)
+        });
+    </script>
+    
+</body>
+</html>

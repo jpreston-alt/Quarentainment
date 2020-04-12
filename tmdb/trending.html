@@ -55,13 +55,37 @@
                 var resString = anyString.substring(2,);
                 console.log(resString);
                 console.log(response.results[i].genre_ids);
-                var moTrend = $("<p>").html(
-                    response.results[i].title + "<br/><img src= 'https://image.tmdb.org/t/p/w200" +
-                    response.results[i].poster_path + "'><br/>" +
-                    response.results[i].vote_average + "<br/>" +
-                    resString + "<br/>" +
-                    response.results[i].overview + "<br/>"
-                );
+                var moTrend = $("<div>");
+
+                // title
+                var mTitle = response.results[i].title;
+                var title = $("<h1>").text(mTitle);
+                moTrend.append(title);
+
+                //image
+                var pic = response.results[i].poster_path
+                var image = $("<img>").attr("src", "https://image.tmdb.org/t/p/w200" + pic)
+                moTrend.append(image);
+
+
+                // score
+                var score = $("<p>").text("Score: " + response.results[i].vote_average + " out of 10");
+                moTrend.append(score);
+
+                //genre
+                var genre = $("<p>").text(resString)
+                moTrend.append(genre);
+
+                //overview
+                var mOverview = $("<p>").text(response.results[i].overview)
+                moTrend.append(mOverview)
+                // var moTrend = $("<p>").html(
+                //     response.results[i].title + "<br/><img src= 'https://image.tmdb.org/t/p/w200" +
+                //     response.results[i].poster_path + "'><br/>" +
+                //     response.results[i].vote_average + "<br/>" +
+                //     resString + "<br/>" +
+                //     response.results[i].overview + "<br/>"
+                
                 $("#movie-view").append(moTrend)
 
             }

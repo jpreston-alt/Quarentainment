@@ -52,12 +52,13 @@
         }).then(function(response) {
             console.log(response);
             var myGenreid = response.results[0].genre_ids;
+            var genString = "";
             for (var i = 0; i < myGenreid.length; i++) {
             //     var myGenreid = response.results[0].genre_ids[0]
             console.log(genreDiction[myGenreid[i]])
-                //console.log(myGenreid)
-            //console.log(response.results[0].genre_ids[i]);
+            genString = genString + ", " + genreDiction[myGenreid[i]];
             }
+            resString = genString.substring(2, );
 
             var movieDiv = $("<div class='movie'>");
 
@@ -66,13 +67,18 @@
             var title = $("<h1>").text(mTitle);
             movieDiv.append(title);
 
+            //image
+            var pic = response.results[0].poster_path
+            var image = $("<img>").attr("src", "https://image.tmdb.org/t/p/w200" + pic)
+            movieDiv.append(image);
+
             // score
-            var score = $("<p>").text(response.results[0].vote_average)
+            var score = $("<p>").text("Score: " + response.results[0].vote_average + " out of 10")
             movieDiv.append(score)
 
             // console.log(genreDiction[response.results[0].genre_ids[0]])
             // console.log(response.results[0].genre_ids[0]);
-            var genre = $("<p>").text(genreDiction[response.results[0].genre_ids[0]])
+            var genre = $("<p>").text(resString)
             // movieDiv.append(genre)
             // console.log(genreDiction.response.results[0].genre_ids[0]);
             // var genre = $("<p>").text(genreDiction.response.results[0].genre_ids[0]);
@@ -80,11 +86,6 @@
 
             var mOverview = $("<p>").text(response.results[0].overview)
             movieDiv.append(mOverview)
-
-            var pic = response.results[0].poster_path
-            var image = $("<img>").attr("src", "https://image.tmdb.org/t/p/w500" + pic)
-            movieDiv.append(image);
-
 
             $("#movie-view").prepend(movieDiv);
             // $("#movie-view").text(JSON.stringify(response.results[0].overview));
