@@ -1,7 +1,20 @@
 var mediaType;
 var genreList = [];
-getStorage();
-renderBrowsePage();
+var cardsArr = [];
+
+function MediaCard (title, author, imgURL, link, summary) {
+    this.title = title;
+    this.author = author;
+    this.imgURL = imgURL;
+    this.link = link;
+    this.summary = summary;
+};
+
+var title;
+var author;
+var imgURL;
+var link;
+var summary;
 
 
 $(document).ready(function () {
@@ -45,22 +58,6 @@ function getStorage() {
     mediaType = localStorage.getItem("mediaType");
 };
 
-
-// renders browse page depending on media type variable
-function renderBrowsePage() {
-    checkMediaType();
-
-    var mediaTypeEl = $("#media-type")
-
-    if (mediaType === "movies") {
-        mediaTypeEl.text("Trending Movies of the Week")
-    } else if (mediaType === "shows") {
-        mediaTypeEl.text("Trending TV Shows of the Week")
-    } else if (mediaType === "books") {
-        mediaTypeEl.text("Trending Books of the Week")
-    }
-};
-
 // function for event handler when user clicks on media link
 function clickMediaType(type) {
     $('.nav-to-' + type ).on("click", function (event) {
@@ -89,9 +86,36 @@ function renderDropdown() {
 
 };
 
-// function to check media type and call data accordingly
-function checkMediaType() {
+function renderTrendingCards() {
+    
+    // create new card elements based on how many objects are in the cardsArray
+    for (var i = 0; i < cardsArr.length; i++) {
+
+        var mediaCardEl = $('<div class="column"><div class= "card"><div class="card-content columns is-mobile"><div class="column"><img src="' + cardsArr[i].imgURL + '" class="media-img"></div><div class="column"><p class="title media-title">' + cardsArr[i].title + '</p><p class="subtitle media-author">' + cardsArr[i].author + '</p><a class="subtitle media-link" href="' + cardsArr[i].link + '">Purchase Here</a><p class="subtitle media-summary">' + cardsArr[i].summary + '</p></div></div><footer class="card-footer"><a href="#" class="card-footer-item add-to-list-btn">Add to My List</a></footer></div></div >')
+
+        // append new card element to content container
+        $("#browse-content-container").append(mediaCardEl);
+
+
+        // if (i % 2 === 0) {
+        //     mediaCardEl.append($("<div class='columns'>"));
+
+        // }
+
+    }
+
+
+  
+};
+
+
+// renders browse page depending on media type variable- pulls data from appropriate API
+function renderBrowsePage() {
+    var mediaTypeEl = $("#media-type");
+
     if (mediaType === "books") {
+        mediaTypeEl.text("Trending Books of the Week")
+
         var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
         var nytBooksUrl = "https://api.nytimes.com/svc/books/v3";
         var nytBookListsUrl = nytBooksUrl + "/lists/names.json?api-key=" + nytApiKey;
@@ -113,15 +137,56 @@ function checkMediaType() {
             renderDropdown();
         });
 
+            var listSelection = "hardcover-fiction";
+
+            var nytBookTitlesUrl =
+                nytBooksUrl + "/lists/current/" + listSelection + "?api-key=" + nytApiKey;
+            $.ajax({
+                url: nytBookTitlesUrl,
+                method: "GET",
+            }).then(function (bookResponse) {
+                console.log(bookResponse);
+                for (j = 0; j < bookResponse.results.books.length; j++) {
+
+                    // save data to variables
+                    title = bookResponse.results.books[j].title;
+                    author = bookResponse.results.books[j].contributor;
+                    imgURL = bookResponse.results.books[j].book_image;
+                    link = bookResponse.results.books[j].amazon_product_url;
+                    summary = bookResponse.results.books[j].description;
+
+                    // create new MediaCard object with variables
+                    var card = new MediaCard(title, author, imgURL, link, summary);
+
+                    // push new MediaCard to cardsArr
+                    cardsArr.push(card);  
+                }
+
+                // render Trending cards to screen
+                renderTrendingCards();
+            });
+   
+
     } else if (mediaType === "movies") {
 
         // call movies data
+        mediaTypeEl.text("Trending Movies of the Week")
+
 
     } else if (mediaType === "shows") {
 
         // call tv show data
+        mediaTypeEl.text("Trending TV Shows of the Week")
         
     }
 };
 
+// define init function
+function init() {
+    getStorage();
+    renderBrowsePage();
+};
+
+// call init
+init();
 
