@@ -24,85 +24,26 @@
         event.preventDefault();
 
         var movie = $("#movie-input").val();
-        var genre = [
-            {
-                "id": 28,
-                "name": "Action"
-            },
-            {
-                "id": 12,
-                "name": "Adventure"
-            },
-            {
-                "id": 16,
-                "name": "Animation"
-            },
-            {
-                "id": 35,
-                "name": "Comedy"
-            },
-            {
-                "id": 80,
-                "name": "Crime"
-            },
-            {
-                "id": 99,
-                "name": "Documentary"
-            },
-            {
-                "id": 18,
-                "name": "Drama"
-            },
-            {
-                "id": 10751,
-                "name": "Family"
-            },
-            {
-                "id": 14,
-                "name": "Fantasy"
-            },
-            {
-                "id": 36,
-                "name": "History"
-            },
-            {
-                "id": 27,
-                "name": "Horror"
-            },
-            {
-                "id": 10402,
-                "name": "Music"
-            },
-            {
-                "id": 9648,
-                "name": "Mystery"
-            },
-            {
-                "id": 10749,
-                "name": "Romance"
-            },
-            {
-                "id": 878,
-                "name": "Science Fiction"
-            },
-            {
-                "id": 10770,
-                "name": "TV Movie"
-            },
-            {
-                "id": 53,
-                "name": "Thriller"
-            },
-            {
-                "id": 10752,
-                "name": "War"
-            },
-            {
-                "id": 37,
-                "name": "Western"
-            }
-        ]
-
+        var genreDiction = {
+            28:"Action",
+            12:"Adventure",
+            16:"Animation",
+            35:"Comedy",
+            80:"Crime",
+            99:"Documentary",
+            18:"Drama",
+            10751:"Family",
+            14:"Fantasy",
+            36:"History",
+            27:"Horror",
+            10402:"Music",
+            10749:"Romance",
+            878:"Science Fiction",
+            10770:"TV Movie",
+            53:"Thriller",
+            10752:"War",
+            37:"Western",
+        };
 
         var queryTMDB = "https://api.themoviedb.org/3/search/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&query=" + movie
         $.ajax({
@@ -110,6 +51,13 @@
           method: "GET"
         }).then(function(response) {
             console.log(response);
+            var myGenreid = response.results[0].genre_ids;
+            for (var i = 0; i < myGenreid.length; i++) {
+            //     var myGenreid = response.results[0].genre_ids[0]
+            console.log(genreDiction[myGenreid[i]])
+                //console.log(myGenreid)
+            //console.log(response.results[0].genre_ids[i]);
+            }
 
             var movieDiv = $("<div class='movie'>");
 
@@ -122,8 +70,13 @@
             var score = $("<p>").text(response.results[0].vote_average)
             movieDiv.append(score)
 
-            var genre = $("<p>").text(response.results[0].genre_ids[0])
-            movieDiv.append(genre)
+            // console.log(genreDiction[response.results[0].genre_ids[0]])
+            // console.log(response.results[0].genre_ids[0]);
+            var genre = $("<p>").text(genreDiction[response.results[0].genre_ids[0]])
+            // movieDiv.append(genre)
+            // console.log(genreDiction.response.results[0].genre_ids[0]);
+            // var genre = $("<p>").text(genreDiction.response.results[0].genre_ids[0]);
+            movieDiv.append(genre);
 
             var mOverview = $("<p>").text(response.results[0].overview)
             movieDiv.append(mOverview)

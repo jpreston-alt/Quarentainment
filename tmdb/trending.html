@@ -14,102 +14,52 @@
     <script>
         var trendURL = "https://api.themoviedb.org/3/trending/movie/day?api_key=660bf8330423e5658590b1cdb677dc08"
         // var apiKey = "660bf8330423e5658590b1cdb677dc08";
-        var genre = [
-            {
-                "id": 28,
-                "name": "Action"
-            },
-            {
-                "id": 12,
-                "name": "Adventure"
-            },
-            {
-                "id": 16,
-                "name": "Animation"
-            },
-            {
-                "id": 35,
-                "name": "Comedy"
-            },
-            {
-                "id": 80,
-                "name": "Crime"
-            },
-            {
-                "id": 99,
-                "name": "Documentary"
-            },
-            {
-                "id": 18,
-                "name": "Drama"
-            },
-            {
-                "id": 10751,
-                "name": "Family"
-            },
-            {
-                "id": 14,
-                "name": "Fantasy"
-            },
-            {
-                "id": 36,
-                "name": "History"
-            },
-            {
-                "id": 27,
-                "name": "Horror"
-            },
-            {
-                "id": 10402,
-                "name": "Music"
-            },
-            {
-                "id": 9648,
-                "name": "Mystery"
-            },
-            {
-                "id": 10749,
-                "name": "Romance"
-            },
-            {
-                "id": 878,
-                "name": "Science Fiction"
-            },
-            {
-                "id": 10770,
-                "name": "TV Movie"
-            },
-            {
-                "id": 53,
-                "name": "Thriller"
-            },
-            {
-                "id": 10752,
-                "name": "War"
-            },
-            {
-                "id": 37,
-                "name": "Western"
-            }
-        ]
-
+        
+        var genreDiction = {
+            28:"Action",
+            12:"Adventure",
+            16:"Animation",
+            35:"Comedy",
+            80:"Crime",
+            99:"Documentary",
+            18:"Drama",
+            10751:"Family",
+            14:"Fantasy",
+            36:"History",
+            27:"Horror",
+            10402:"Music",
+            10749:"Romance",
+            878:"Science Fiction",
+            10770:"TV Movie",
+            53:"Thriller",
+            10752:"War",
+            37:"Western",
+        };
         $.ajax({
             url: trendURL,
             method: "GET"
         }).then(function (response) {
             console.log(response)
 
-            for (i = 0; i < response.results.length; i++) {
-                for (j = 0; j < response.results[i].genre_ids.length; i++) {
-                    for (k = 0; k <response.results[i].genre_ids[j].length; i++) {
-                        if (results[i].genre_ids[j].id 
-                    }
+            for (var i = 0; i < response.results.length; i++) {
+                
+                var myGenreids = response.results[i].genre_ids;
+                var anyString = ""
+                for (var j = 0; j < myGenreids.length; j++) {
+                    console.log(genreDiction[myGenreids[j]])
+                    // anyString.concat(genreDiction)
+                    // anyString + "," + genreDiction[myGenreids[j]]
+                    anyString = anyString + ", " + genreDiction[myGenreids[j]]
+                 
                 }
+                var resString = anyString.substring(2,);
+                console.log(resString);
+                console.log(response.results[i].genre_ids);
                 var moTrend = $("<p>").html(
                     response.results[i].title + "<br/><img src= 'https://image.tmdb.org/t/p/w200" +
                     response.results[i].poster_path + "'><br/>" +
                     response.results[i].vote_average + "<br/>" +
-                    response.results[i].genre_ids + "<br/>" +
+                    resString + "<br/>" +
                     response.results[i].overview + "<br/>"
                 );
                 $("#movie-view").append(moTrend)
