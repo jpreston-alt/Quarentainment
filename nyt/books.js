@@ -40,7 +40,7 @@ $(document).ready(function () {
             bookResponse.results.books[j].book_image +
             "'><br/><a href='" +
             bookResponse.results.books[j].amazon_product_url +
-            "'>Buy It!</a><br/>" +
+            "' target='_blank'>Buy It!</a><br/>" +
             bookResponse.results.books[j].description +
             "<br/>"
         );

@@ -1,4 +1,5 @@
 var mediaType;
+var genreList = [];
 getStorage();
 renderBrowsePage();
 
@@ -27,31 +28,6 @@ $(document).ready(function () {
     clickMediaType("shows");
 
 
-
-    var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
-    var nytBooksUrl = "https://api.nytimes.com/svc/books/v3";
-    var nytBookListsUrl = nytBooksUrl + "/lists/names.json?api-key=" + nytApiKey;
-
-    $.ajax({
-        url: nytBookListsUrl,
-        method: "GET",
-    }).then(function (response) {
-        for (i = 0; i < response.results.length; i++) {
-            var listYear = parseInt(
-                response.results[i].newest_published_date.substring(0, 4)
-            );
-            if (listYear >= 2019) {
-                var bookGenre = response.results[i].display_name;
-                console.log(bookGenre);
-
-
-                // var listName = response.results[i].display_name;
-                // var listItem = $("<li>").text(listName);
-                // $("#bookLists").append(listItem);
-            }
-        }
-    });
-
 });
 
 // sets local storage
@@ -72,7 +48,7 @@ function getStorage() {
 
 // renders browse page depending on media type variable
 function renderBrowsePage() {
-    renderDropdown(mediaType);
+    checkMediaType();
 
     var mediaTypeEl = $("#media-type")
 
@@ -102,27 +78,50 @@ function clickMediaType(type) {
     });
 };
 
-// function to render drop down based on media type
-function renderDropdown(type) {
-    var dropdownEl = $("#media-dropdown")
-    var movieGenres = ["Action", "Horror", "Drama", "Comedy"];
-    var tvGenres = ["Sitcom"];
-    var bookGenres = ["Fiction", "Non-Fiction", "Science"];
+// function for rendering dropdown menu based on genreList
+function renderDropdown() {
 
-    if (type === "movies") {
-        arr = movieGenres;
-    } else if (type === "shows") {
-        arr = tvGenres;
-    } else {
-        arr = bookGenres;
-    };
-
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < genreList.length; i++) {
         var $newOption = $("<option>")
-        $newOption.text(arr[i]);
-        dropdownEl.append($newOption);
+        $newOption.text(genreList[i]);
+        $("#media-dropdown").append($newOption);
     };
 
+};
+
+// function to check media type and call data accordingly
+function checkMediaType() {
+    if (mediaType === "books") {
+        var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
+        var nytBooksUrl = "https://api.nytimes.com/svc/books/v3";
+        var nytBookListsUrl = nytBooksUrl + "/lists/names.json?api-key=" + nytApiKey;
+
+        $.ajax({
+            url: nytBookListsUrl,
+            method: "GET",
+        }).then(function (response) {
+            for (i = 0; i < response.results.length; i++) {
+                var listYear = parseInt(
+                    response.results[i].newest_published_date.substring(0, 4)
+                );
+                if (listYear >= 2019) {
+                    var listItem = response.results[i].display_name;
+                    genreList.push(listItem);
+                }
+            };
+
+            renderDropdown();
+        });
+
+    } else if (mediaType === "movies") {
+
+        // call movies data
+
+    } else if (mediaType === "shows") {
+
+        // call tv show data
+        
+    }
 };
 
 
