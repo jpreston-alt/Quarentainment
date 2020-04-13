@@ -2,7 +2,7 @@ var mediaType;
 var genreList = [];
 var cardsArr = [];
 
-function MediaCard (title, author, imgURL, link, summary) {
+function MediaCard(title, author, imgURL, link, summary) {
     this.title = title;
     this.author = author;
     this.imgURL = imgURL;
@@ -58,21 +58,17 @@ function getStorage() {
 
 // function for event handler when user clicks on media link
 function clickMediaType(type) {
-    $('.nav-to-' + type ).on("click", function (event) {
+    $('.nav-to-' + type).on("click", function (event) {
 
         // only if you're own the browse page preventDefault
-        if ($("body").is(".browse-page")) {
-            event.preventDefault();
-        };
+        // if ($("body").is(".browse-page")) {
+        //     event.preventDefault();
+        // };
 
-        // empty content container of any cards
+        // empty content container and cards array of any cards
         $("#browse-content-container").empty();
-
-        // empty cards array of any objects it's storing
         cardsArr = [];
 
-        // empty dropdown of data
-        $("#media-dropdown").empty();
         mediaType = type;
         setStorage();
         renderBrowsePage();
@@ -81,6 +77,7 @@ function clickMediaType(type) {
 
 // function for rendering dropdown menu based on genreList
 function renderDropdown() {
+    $("#media-dropdown").empty();
 
     for (var i = 0; i < genreList.length; i++) {
         var $newOption = $("<option>")
@@ -91,7 +88,7 @@ function renderDropdown() {
 };
 
 function renderTrendingCards() {
-    
+
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
 
@@ -120,6 +117,7 @@ function renderBrowsePage() {
             url: nytBookListsUrl,
             method: "GET",
         }).then(function (response) {
+            console.log(response);
             for (i = 0; i < response.results.length; i++) {
                 var listYear = parseInt(
                     response.results[i].newest_published_date.substring(0, 4)
@@ -133,35 +131,35 @@ function renderBrowsePage() {
             renderDropdown();
         });
 
-            var listSelection = "hardcover-fiction";
+        var listSelection = "hardcover-fiction";
 
-            var nytBookTitlesUrl =
-                nytBooksUrl + "/lists/current/" + listSelection + "?api-key=" + nytApiKey;
-            $.ajax({
-                url: nytBookTitlesUrl,
-                method: "GET",
-            }).then(function (bookResponse) {
-                console.log(bookResponse);
-                for (j = 0; j < bookResponse.results.books.length; j++) {
+        var nytBookTitlesUrl =
+            nytBooksUrl + "/lists/current/" + listSelection + "?api-key=" + nytApiKey;
+        $.ajax({
+            url: nytBookTitlesUrl,
+            method: "GET",
+        }).then(function (bookResponse) {
+            console.log(bookResponse);
+            for (j = 0; j < bookResponse.results.books.length; j++) {
 
-                    // save data to variables
-                    title = bookResponse.results.books[j].title;
-                    author = bookResponse.results.books[j].contributor;
-                    imgURL = bookResponse.results.books[j].book_image;
-                    link = bookResponse.results.books[j].amazon_product_url;
-                    summary = bookResponse.results.books[j].description;
+                // save data to variables
+                title = bookResponse.results.books[j].title;
+                author = bookResponse.results.books[j].contributor;
+                imgURL = bookResponse.results.books[j].book_image;
+                link = bookResponse.results.books[j].amazon_product_url;
+                summary = bookResponse.results.books[j].description;
 
-                    // create new MediaCard object with variables
-                    var card = new MediaCard(title, author, imgURL, link, summary);
+                // create new MediaCard object with variables
+                var card = new MediaCard(title, author, imgURL, link, summary);
 
-                    // push new MediaCard to cardsArr
-                    cardsArr.push(card);  
-                }
+                // push new MediaCard to cardsArr
+                cardsArr.push(card);
+            }
 
-                // render Trending cards to screen
-                renderTrendingCards();
-            });
-   
+            // render Trending cards to screen
+            renderTrendingCards();
+        });
+
 
     } else if (mediaType === "movies") {
 
@@ -192,6 +190,15 @@ function renderBrowsePage() {
             37: "Western",
         };
 
+        // render dropdown menu using genreDiction values
+        var genresArr = Object.values(genreDiction);
+        
+        for (var i = 0; i < genresArr.length; i++) {
+            genreList.push(genresArr[i]);
+        };
+
+        renderDropdown();
+
         // call trending movies data
         $.ajax({
             url: trendURL,
@@ -213,8 +220,8 @@ function renderBrowsePage() {
                 // save movie data to variables
                 title = response.results[i].title;
                 imgURL = "https://image.tmdb.org/t/p/w200/" + response.results[i].poster_path;
-                    // response.results[i].vote_average
-                    // resString
+                // response.results[i].vote_average
+                // resString
                 summary = response.results[i].overview;
 
 
@@ -222,7 +229,7 @@ function renderBrowsePage() {
                 var card = new MediaCard(title, author, imgURL, link, summary);
 
                 // push new MediaCard to cardsArr
-                cardsArr.push(card); 
+                cardsArr.push(card);
             };
 
             // render Trending cards to screen
@@ -234,7 +241,7 @@ function renderBrowsePage() {
 
         // call tv show data
         mediaTypeEl.text("Trending TV Shows of the Week")
-        
+
     }
 };
 
@@ -248,4 +255,3 @@ function init() {
 
 // call init
 init();
-
