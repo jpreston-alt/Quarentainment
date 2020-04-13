@@ -7,16 +7,90 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <div id="movie-view"></div>
+    <div id="TV-view"></div>
     <script>
-        var tQuery = "https://api.themoviedb.org/3/trending/all/day?api_key=660bf8330423e5658590b1cdb677dc08"
+        var tQuery = "https://api.themoviedb.org/3/trending/tv/day?api_key=660bf8330423e5658590b1cdb677dc08"
+
+        var genreDiction = {
+            10759:"Action & Adventure",
+            16:"Animation",
+            35:"Comedy",
+            80:"Crime",
+            99:"Documentary",
+            18:"Drama",
+            10751:"Family",
+            10762:"Kids",
+            9648:"Mystery",
+            10763:"News",
+            10764:"Reality",
+            10765:"Sci-Fi & Fantasy",
+            10766:"Soap",
+            10767:"Talk",
+            10768:"War & Politics",
+            37:"Western",
+            28:"Action",
+            12:"Adventure",
+            14:"Fantasy",
+            36:"History",
+            27:"Horror",
+            10402:"Music",
+            10749:"Romance",
+            878:"Science Fiction",
+            10770:"TV Movie",
+            53:"Thriller",
+            10752:"War",
+        };
 
         $.ajax({
             url: tQuery,
             method: "GET"
         }).then(function (response) {
             console.log(response)
+
+            for (var i = 0; i < response.results.length; i++) {
+                
+                var myGenreids = response.results[i].genre_ids;
+                var anyString = ""
+                for (var j = 0; j < myGenreids.length; j++) {
+                    console.log(genreDiction[myGenreids[j]])
+                    
+                    anyString = anyString + ", " + genreDiction[myGenreids[j]]
+                 
+                }
+                var resString = anyString.substring(2,);
+                console.log(resString);
+                console.log(response.results[i].genre_ids);
+                var tvTrend = $("<div>");
+
+                // title
+                var mtitle = $("<h1>").text(response.results[i].original_name);
+                tvTrend.append(mtitle);
+
+                //image
+                var pic = response.results[i].poster_path
+                var image = $("<img>").attr("src", "https://image.tmdb.org/t/p/w200" + pic)
+                tvTrend.append(image);
+
+
+                // score
+                var score = $("<p>").text("Score: " + response.results[i].vote_average + " out of 10");
+                tvTrend.append(score);
+
+                //genre
+                var genre = $("<p>").text(resString)
+                tvTrend.append(genre);
+
+                //overview
+                var mOverview = $("<p>").text(response.results[i].overview)
+                tvTrend.append(mOverview)
+                
+                $("#TV-view").append(tvTrend)
+
+            }
         });
+        
+
+
     </script>
     
 </body>

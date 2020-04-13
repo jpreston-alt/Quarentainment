@@ -58,9 +58,8 @@
                 var moTrend = $("<div>");
 
                 // title
-                var mTitle = response.results[i].title;
-                var title = $("<h1>").text(mTitle);
-                moTrend.append(title);
+                var mtitle = $("<h1>").text(response.results[i].title);
+                moTrend.append(mtitle);
 
                 //image
                 var pic = response.results[i].poster_path
