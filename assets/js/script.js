@@ -1,6 +1,7 @@
 var mediaType;
 var genreList = [];
 var cardsArr = [];
+var listSelection;
 
 function MediaCard(title, author, imgURL, link, summary) {
     this.title = title;
@@ -19,10 +20,8 @@ var summary;
 
 $(document).ready(function () {
 
-    // event listener for hamburger menu - when user clicks it it drops down and vice versa
-    var $navbarBurgers = $(".navbar-burger")
-
-    $navbarBurgers.each(function () {
+    // event listener for hamburger drop down menu
+    $(".navbar-burger").each(function () {
         $(this).on("click", function () {
 
             // targets data-target attribute which is equal to regular nav bar menu's ID
@@ -39,6 +38,18 @@ $(document).ready(function () {
     clickMediaType("movies");
     clickMediaType("books");
     clickMediaType("shows");
+
+
+    // event handler for when user changes genre on dropdown menu and clicks search button
+    $("#dropdown-search-btn").on("click", function() {
+       var genreSelection = ($("#dropdown-form").find("#media-dropdown").val()).replace(/\s+/g, '-');
+       console.log(genreSelection);
+
+        listSelection = genreSelection;
+        setStorage();
+        renderBrowsePage();
+    })
+
 });
 
 // sets local storage
@@ -46,28 +57,27 @@ function setStorage() {
 
     // media type
     localStorage.setItem("mediaType", mediaType);
+    localStorage.setItem("listSelection", listSelection);
 };
 
 
 // pulls from local storage
 function getStorage() {
-
-    // saves media type to variable
     mediaType = localStorage.getItem("mediaType");
+    var storageList = localStorage.getItem("listSelection");
+
+    // if list selection exists
+    if (storageList !== null) {
+        listSelection = storageList;
+    };
 };
 
 // function for event handler when user clicks on media link
 function clickMediaType(type) {
     $('.nav-to-' + type).on("click", function (event) {
-
-        // only if you're own the browse page preventDefault
-        // if ($("body").is(".browse-page")) {
-        //     event.preventDefault();
-        // };
-
-        // empty content container and cards array of any cards
-        $("#browse-content-container").empty();
-        cardsArr = [];
+        if (type === "books") {
+            listSelection = "hardcover-fiction";
+        };
 
         mediaType = type;
         setStorage();
@@ -104,6 +114,11 @@ function renderTrendingCards() {
 
 // renders browse page depending on media type variable- pulls data from appropriate API
 function renderBrowsePage() {
+
+    // empty cards container and cardsArr
+    $("#browse-content-container").empty();
+    cardsArr = [];
+
     var mediaTypeEl = $("#media-type");
 
     if (mediaType === "books") {
@@ -123,7 +138,7 @@ function renderBrowsePage() {
                     response.results[i].newest_published_date.substring(0, 4)
                 );
                 if (listYear >= 2019) {
-                    var listItem = response.results[i].display_name;
+                    var listItem = response.results[i].list_name;
                     genreList.push(listItem);
                 }
             };
@@ -131,15 +146,15 @@ function renderBrowsePage() {
             renderDropdown();
         });
 
-        var listSelection = "hardcover-fiction";
+        
 
         var nytBookTitlesUrl =
             nytBooksUrl + "/lists/current/" + listSelection + "?api-key=" + nytApiKey;
+
         $.ajax({
             url: nytBookTitlesUrl,
             method: "GET",
         }).then(function (bookResponse) {
-            console.log(bookResponse);
             for (j = 0; j < bookResponse.results.books.length; j++) {
 
                 // save data to variables
@@ -245,7 +260,9 @@ function renderBrowsePage() {
     }
 };
 
+function changeDropdown() {
 
+};
 
 // define init function
 function init() {
