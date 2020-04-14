@@ -165,13 +165,12 @@ function renderMediaCards() {
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
 
-        var mediaCardEl = $('<div class="column is-half"><div class= "card media-card"><div class="card-content columns is-mobile"><div class="column"><img src="' + cardsArr[i].imgURL + '" class="media-img"></div><div class="column is-scrollable"><p class="title media-title">' + cardsArr[i].title + '</p><p class="subtitle media-authorOrRating">' + cardsArr[i].authorOrRating + '</p><p>' + cardsArr[i].linkOrGenre + '</p><br><p class="subtitle media-summary">' + cardsArr[i].summary + '</p></div></div><footer class="card-footer"><a href="#" class="card-footer-item add-to-list-btn">Add to My List</a></footer></div></div >')
+        var mediaCardEl = $('<div class="column is-half"><div class= "card media-card"><div class="card-content columns is-mobile"><div class="column"><img src="' + cardsArr[i].imgURL + '" class="media-img"></div><div class="column has-text-centered"><p class="title is-4 media-title">' + cardsArr[i].title + '</p><p class="media-authorOrRating is-italic subtitle">' + cardsArr[i].authorOrRating + '</p><br><div class="is-scrollable"><p class="media-summary">' + cardsArr[i].summary + '</p><br><p class="media-linkOrGenre">' + cardsArr[i].linkOrGenre + '</p></div></div></div><div class="fixed-bottom"><footer class="card-footer"><a href="#" class="card-footer-item add-to-list-btn">Add to My List</a></footer></div></div></div >')
 
         // append new card element to content container
         $("#browse-content-container").append(mediaCardEl);
     };
 };
-
 
 // renders trending browse page depending on media type variable
 function renderTrendBrowsePage() {
@@ -219,6 +218,8 @@ function renderTrendBrowsePage() {
 };
 
 function nytCriticsPicks() {
+    mediaTypeEl.text("New York Times Critics' Picks")
+
     var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
     var nytMoviesUrl = "https://api.nytimes.com/svc/movies/v2";
     var nytMovieListUrl =
@@ -232,7 +233,7 @@ function nytCriticsPicks() {
             title = response.results[i].display_title;
             authorOrRating = response.results[i].mpaa_rating;
             imgURL = response.results[i].multimedia.src;
-            linkOrGenre = '<a class="subtitle media-linkOrGenre" href="' + response.results[i].link.url.amazon_product_url + '">Purchase Here</a>';
+            linkOrGenre = '<a class="media-linkOrGenre" href="' + response.results[i].link.url + '"target="_blank">Read NYT Review</a>';
             summary = response.results[i].summary_short;
 
             // create new MediaCard object with variables
@@ -243,6 +244,7 @@ function nytCriticsPicks() {
         }
 
         renderMediaCards();
+        console.log(response);
     });
 };
 
@@ -286,7 +288,7 @@ function renderTrendMovieOrTV(type, genreDictionType) {
             };
 
             imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
-            authorOrRating = response.results[i].vote_average
+            authorOrRating = response.results[i].vote_average + " / 10";
             linkOrGenre = resString;
             summary = response.results[i].overview;
 
@@ -319,10 +321,10 @@ function changeBookCards() {
         for (j = 0; j < bookResponse.results.books.length; j++) {
 
             // save data to variables
-            title = bookResponse.results.books[j].title;
+            title = (bookResponse.results.books[j].title);
             authorOrRating = bookResponse.results.books[j].contributor;
             imgURL = bookResponse.results.books[j].book_image;
-            linkOrGenre = '<a class="subtitle media-linkOrGenre" href="' + bookResponse.results.books[j].amazon_product_url + '">Purchase Here</a>'
+            linkOrGenre = '<a class="media-linkOrGenre" href="' + bookResponse.results.books[j].amazon_product_url + '">Purchase Here</a>'
             summary = bookResponse.results.books[j].description;
 
             // create new MediaCard object with variables

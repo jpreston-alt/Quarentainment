@@ -3,15 +3,43 @@
     margin-bottom: 40px;
 }
 
-/* .media-card {
-    height: 500px;
+.media-summary {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+.media-linkOrGenre {
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.media-authorOrRating {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+};
+
+.is-4 {
+    margin-bottom: 0px !important;
+}
+
+/* 
+.media-card {
+    height: 400px;
 }
 
 .is-scrollable {
-    height: 300px;
+    height: 200px;
     overflow-y: scroll;
 }
 
 .media-img {
     max-height: 300px;
+}
+
+.fixed-bottom {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 } */
+
