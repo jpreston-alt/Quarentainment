@@ -1,9 +1,10 @@
-var mediaType;
-var genreList = [];
-var cardsArr = [];
-var listSelection;
+var mediaType; // movies shows or books
+var genreList = []; // for dropdown
+var cardsArr = [];  // holds MediaCard object instances
+var listSelection; // genre to be searched for
 var mediaTypeEl = $("#media-type");
 
+// media card object constructor
 function MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary) {
     this.title = title;
     this.authorOrRating = authorOrRating;
@@ -11,12 +12,6 @@ function MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary) {
     this.linkOrGenre = linkOrGenre;
     this.summary = summary;
 };
-
-var title;
-var authorOrRating;
-var imgURL;
-var linkOrGenre;
-var summary;
 
 // movie genres
 var genreDictionMovies = {
@@ -71,7 +66,6 @@ var genreDictionTV = {
     10752: "War",
 };
 
-
 // event listeners
 $(document).ready(function () {
 
@@ -89,7 +83,7 @@ $(document).ready(function () {
         })
     });
 
-    // call event handlers for when user clicks on movies, books, or shows linkOrGenres
+    // event handlers for movies, books, and shows links (from navbar or home page)
     clickMediaType("movies");
     clickMediaType("books");
     clickMediaType("shows");
@@ -98,26 +92,33 @@ $(document).ready(function () {
     // event handler for when user changes genre on dropdown menu and clicks search button
     $("#dropdown-search-btn").on("click", function() {
        var genreSelection = ($("#dropdown-form").find("#media-dropdown").val());
+        $("#browse-content-container").empty();
+        cardsArr = [];
 
-        listSelection = genreSelection.replace(/\s+/g, '-');
-        setStorage();
+       if (genreSelection === "Trending") {
+           renderTrendBrowsePage();
+        } else if (genreSelection === "NYT Critics Picks") {
+            nytCriticsPicks();
+        } else {
+           listSelection = genreSelection.replace(/\s+/g, '-');
+           setStorage();
 
-        if (mediaType === "books") {
-            mediaTypeEl.text("Top Selling " + genreSelection);
-            changeBookCards();
-        } else if (mediaType === "movies") {
-            changeMovieCards();
-        } else if (mediaType === "shows") {
-            changeTvShowCards();
-        }
+           if (mediaType === "books") {
+               mediaTypeEl.text("Top Selling " + genreSelection);
+               changeBookCards();
+           } else if (mediaType === "movies") {
+               mediaTypeEl.text("Trending Movies: " + genreSelection);
+               changeMovieOrTVCards();
+           } else if (mediaType === "shows") {
+               mediaTypeEl.text("Trending TV Shows: " + genreSelection);
+               changeMovieOrTVCards();
+           }
+       }
     });
-
 });
 
 // sets local storage
 function setStorage() {
-
-    // media type
     localStorage.setItem("mediaType", mediaType);
     localStorage.setItem("listSelection", listSelection);
 };
@@ -139,23 +140,27 @@ function clickMediaType(type) {
     $('.nav-to-' + type).on("click", function () {
         mediaType = type;
         setStorage();
-        renderBrowsePage();
+        renderTrendBrowsePage();
     });
 };
 
 // function for rendering dropdown menu based on genreList
 function renderDropdown() {
     $("#media-dropdown").empty();
+    $("#media-dropdown").append($("<option>").text("Trending"));
 
-    for (var i = 0; i < genreList.length; i++) {
-        var $newOption = $("<option>")
-        $newOption.text(genreList[i]);
-        $("#media-dropdown").append($newOption);
+    if (mediaType === "movies") {
+        $("#media-dropdown").append($("<option>").text("NYT Critics Picks"));
     };
 
+    for (var i = 0; i < genreList.length; i++) {
+        var newOption = $("<option>")
+        newOption.text(genreList[i]);
+        $("#media-dropdown").append(newOption);
+    };
 };
 
-function renderTrendingCards() {
+function renderMediaCards() {
 
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
@@ -169,7 +174,7 @@ function renderTrendingCards() {
 
 
 // renders trending browse page depending on media type variable
-function renderBrowsePage() {
+function renderTrendBrowsePage() {
 
     // empty cards container and cardsArr
     $("#browse-content-container").empty();
@@ -177,8 +182,9 @@ function renderBrowsePage() {
 
     if (mediaType === "books") {
         listSelection = "hardcover-fiction";
-        mediaTypeEl.text("Top Selling Books of the Week")
+        mediaTypeEl.text("Top Selling Books this Week")
 
+        // renders dropdown
         var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
         var nytBooksUrl = "https://api.nytimes.com/svc/books/v3";
         var nytBookListsUrl = nytBooksUrl + "/lists/names.json?api-key=" + nytApiKey;
@@ -197,122 +203,110 @@ function renderBrowsePage() {
                     genreList.push(listItem);
                 }
             };
-
             renderDropdown();
         });
 
         changeBookCards();
 
     } else if (mediaType === "movies") {
-
-        // change page title
-        mediaTypeEl.text("Trending Movies of the Week")
-
-        // render dropdown based on genres
-        var genresArr = Object.values(genreDictionMovies);
-        for (var i = 0; i < genresArr.length; i++) {
-            genreList.push(genresArr[i]);
-        };
-        renderDropdown();
-
-        // get trending movies data
-        var trendURL = "https://api.themoviedb.org/3/trending/movie/day?api_key=660bf8330423e5658590b1cdb677dc08"
-
-        $.ajax({
-            url: trendURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response)
-
-            for (var i = 0; i < response.results.length; i++) {
-
-                // convert genre id's to text
-                var myGenreids = response.results[i].genre_ids;
-                var anyString = ""
-                for (var j = 0; j < myGenreids.length; j++) {
-                    anyString = anyString + ", " + genreDictionMovies[myGenreids[j]]
-                };
-
-                var resString = anyString.substring(2);
-
-                // save movie data to variables
-                title = response.results[i].title;
-                imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
-                authorOrRating =  response.results[i].vote_average
-                linkOrGenre = resString;
-                summary = response.results[i].overview;
-
-
-                // create new MediaCard object with variables
-                var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
-
-                // push new MediaCard to cardsArr
-                cardsArr.push(card);
-            };
-
-            // render Trending cards to screen
-            renderTrendingCards();
-        });
-
+        mediaTypeEl.text("Trending Movies this Week")
+        renderTrendMovieOrTV("movie", genreDictionMovies);
 
     } else if (mediaType === "shows") {
-
-        // call tv show data
-        mediaTypeEl.text("Trending TV Shows of the Week")
-
-        // render dropdown based on genres
-        var genresArr = Object.values(genreDictionTV);
-        for (var i = 0; i < genresArr.length; i++) {
-            genreList.push(genresArr[i]);
-        };
-        renderDropdown();
-
-        // get trending TV data
-        var tQuery = "https://api.themoviedb.org/3/trending/tv/day?api_key=660bf8330423e5658590b1cdb677dc08"
-
-        $.ajax({
-            url: tQuery,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response)
-
-            for (var i = 0; i < response.results.length; i++) {
-
-                var myGenreids = response.results[i].genre_ids;
-                var anyString = ""
-                for (var j = 0; j < myGenreids.length; j++) {
-                    anyString = anyString + ", " + genreDictionTV[myGenreids[j]]
-                }
-
-                var resString = anyString.substring(2);
-
-                
-                title = response.results[i].original_name;
-                imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
-                authorOrRating= response.results[i].vote_average + " out of 10";
-                linkOrGenre = resString
-                summary = response.results[i].overview;
-
-                // create new MediaCard object with variables
-                var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
-
-                // push new MediaCard to cardsArr
-                cardsArr.push(card);
-
-            };
-
-            renderTrendingCards();
-        });
-
+        mediaTypeEl.text("Trending TV Shows this Week")
+        renderTrendMovieOrTV("tv", genreDictionTV);
     }
 };
+
+function nytCriticsPicks() {
+    var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
+    var nytMoviesUrl = "https://api.nytimes.com/svc/movies/v2";
+    var nytMovieListUrl =
+        nytMoviesUrl + "/reviews/picks.json?api-key=" + nytApiKey;
+
+    $.ajax({
+        url: nytMovieListUrl,
+        method: "GET",
+    }).then(function (response) {
+        for (i = 0; i < response.results.length; i++) {
+            title = response.results[i].display_title;
+            authorOrRating = response.results[i].mpaa_rating;
+            imgURL = response.results[i].multimedia.src;
+            linkOrGenre = '<a class="subtitle media-linkOrGenre" href="' + response.results[i].link.url.amazon_product_url + '">Purchase Here</a>';
+            summary = response.results[i].summary_short;
+
+            // create new MediaCard object with variables
+            var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
+
+            // push new MediaCards to cardsArr
+            cardsArr.push(card);
+        }
+
+        renderMediaCards();
+    });
+};
+
+
+function renderTrendMovieOrTV(type, genreDictionType) {
+
+    // render dropdown based on genres
+    var genresArr = Object.values(genreDictionType);
+    for (var i = 0; i < genresArr.length; i++) {
+        genreList.push(genresArr[i]);
+    };
+
+    renderDropdown();
+
+    // get trending data
+    var trendURL = "https://api.themoviedb.org/3/trending/" + type + "/day?api_key=660bf8330423e5658590b1cdb677dc08"
+
+    $.ajax({
+        url: trendURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response)
+
+        for (var i = 0; i < response.results.length; i++) {
+
+            // convert genre id's to text
+            var myGenreids = response.results[i].genre_ids;
+            var anyString = ""
+
+            for (var j = 0; j < myGenreids.length; j++) {
+                anyString = anyString + ", " + genreDictionType[myGenreids[j]]
+            };
+
+            var resString = anyString.substring(2);
+
+            // save movie data to variables
+            if (mediaType === "movies") {
+                title = response.results[i].title;
+            } else {
+                title = response.results[i].original_name;
+            };
+
+            imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
+            authorOrRating = response.results[i].vote_average
+            linkOrGenre = resString;
+            summary = response.results[i].overview;
+
+            // create new MediaCard object with variables
+            var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
+
+            // push new MediaCards to cardsArr
+            cardsArr.push(card);
+        };
+
+        // render cards form cardsArr to screen
+        renderMediaCards();
+    });
+};
+
 
 // change book cards when genre is switched from dropdown menu
 function changeBookCards() {
 
-    $("#browse-content-container").empty();
-    cardsArr = [];
-
+    // get data from NYT api
     var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
     var nytBooksUrl = "https://api.nytimes.com/svc/books/v3";
     var nytBookTitlesUrl =
@@ -336,33 +330,26 @@ function changeBookCards() {
 
             // push new MediaCard to cardsArr
             cardsArr.push(card);
-        }
+        };
 
-        // render Trending cards to screen
-        renderTrendingCards();
+        // render cards from cards array to screen
+        renderMediaCards();
     });
 };
 
 // change movie cards when genre is switched from dropdown menu
-function changeMovieCards() {
-    console.log("changed movie genre");
+function changeMovieOrTVCards(type) {
+
+    console.log("changed movies or tv genre");
+
+    // call data from TMDB to browse by genre
+
 };
-
-
-// change tv show cards when genre is switched from dropdown menu
-function changeTvShowCards() {
-    console.log("changed tv show genre");
-};
-
-
-
-
-
 
 // define init function
 function init() {
     getStorage();
-    renderBrowsePage();
+    renderTrendBrowsePage();
 };
 
 // call init
