@@ -82,33 +82,6 @@ $(document).ready(function () {
       $navbarMenuID.toggleClass("is-active");
     });
   });
-
-  // event handler for when user changes genre on dropdown menu and clicks search button
-  $("#dropdown-search-btn").on("click", function () {
-    var genreSelection = $("#dropdown-form").find("#media-dropdown").val();
-    $("#browse-content-container").empty();
-    cardsArr = [];
-
-    if (genreSelection === "Trending") {
-      renderTrendBrowsePage();
-    } else if (genreSelection === "NYT Critics Picks") {
-      nytCriticsPicks();
-    } else {
-      listSelection = genreSelection.replace(/\s+/g, "-");
-      setStorage();
-
-      if (mediaType === "books") {
-        mediaTypeEl.text("Top Selling " + genreSelection);
-        changeBookCards();
-      } else if (mediaType === "movies") {
-        mediaTypeEl.text("Trending Movies: " + genreSelection);
-        changeMovieOrTVCards();
-      } else if (mediaType === "shows") {
-        mediaTypeEl.text("Trending TV Shows: " + genreSelection);
-        changeMovieOrTVCards();
-      }
-    }
-  });
   
   // event handlers for movies, books, and shows links (from navbar or home page)
   $(".nav-to-movies").on("click", clickMediaType);
@@ -119,6 +92,7 @@ $(document).ready(function () {
   $("#dropdown-search-btn").on("click", function () {
     var genreSelection = $("#dropdown-form").find("#media-dropdown").val();
     $("#browse-content-container").empty();
+    genreList = [];
     cardsArr = [];
 
     if (genreSelection === "Trending") {
@@ -241,9 +215,10 @@ function renderTrendBrowsePage() {
         }
       }
       renderDropdown();
+      changeBookCards();
     });
 
-    changeBookCards();
+
   } else if (mediaType === "movies") {
     mediaTypeEl.text("Trending Movies this Week");
     renderTrendMovieOrTV("movie", genreDictionMovies);
