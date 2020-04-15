@@ -82,10 +82,36 @@ $(document).ready(function () {
     });
   });
 
+  // event handler for when user changes genre on dropdown menu and clicks search button
+  $("#dropdown-search-btn").on("click", function () {
+    var genreSelection = $("#dropdown-form").find("#media-dropdown").val();
+    $("#browse-content-container").empty();
+    cardsArr = [];
+
+    if (genreSelection === "Trending") {
+      renderTrendBrowsePage();
+    } else if (genreSelection === "NYT Critics Picks") {
+      nytCriticsPicks();
+    } else {
+      listSelection = genreSelection.replace(/\s+/g, "-");
+      setStorage();
+
+      if (mediaType === "books") {
+        mediaTypeEl.text("Top Selling " + genreSelection);
+        changeBookCards();
+      } else if (mediaType === "movies") {
+        mediaTypeEl.text("Trending Movies: " + genreSelection);
+        changeMovieOrTVCards();
+      } else if (mediaType === "shows") {
+        mediaTypeEl.text("Trending TV Shows: " + genreSelection);
+        changeMovieOrTVCards();
+      }
+    }
+  });
   // event handlers for movies, books, and shows links (from navbar or home page)
-  clickMediaType("movies");
-  clickMediaType("books");
-  clickMediaType("shows");
+  $(".nav-to-movies").on("click", clickMediaType);
+  $(".nav-to-books").on("click", clickMediaType);
+  $(".nav-to-shows").on("click", clickMediaType);
 
   // event handler for when user changes genre on dropdown menu and clicks search button
   $("#dropdown-search-btn").on("click", function () {
@@ -133,13 +159,10 @@ function getStorage() {
 }
 
 // function for event handler when user clicks on media genre
-function clickMediaType(type) {
-  console.log(type);
-  $(".nav-to-" + type).on("click", function () {
-    mediaType = type;
-    setStorage();
-    renderTrendBrowsePage();
-  });
+function clickMediaType() {
+  mediaType = $(this).attr("data-type");
+  setStorage();
+  renderTrendBrowsePage();
 }
 
 // function for rendering dropdown menu based on genreList
