@@ -163,13 +163,13 @@ function renderMediaCards() {
     var mediaCardEl = $(
       '<div class="column is-half"><div class= "card media-card"><div class="card-content columns is-mobile"><div class="column"><img src="' +
         cardsArr[i].imgURL +
-        '" class="media-img"></div><div class="column has-text-centered"><p class="title is-4 media-title">' +
+        '" class="media-img"></div><div class="column has-text-centered is-scrollable"><p class="title is-4 media-title">' +
         cardsArr[i].title +
         '</p><p class="media-authorOrRating is-italic subtitle">' +
         cardsArr[i].authorOrRating +
-        '</p><p class="media-score is-italic subtitle">' +
+        '</p><p class="media-score">' +
         cardsArr[i].score +
-        '</p><br><div class="is-scrollable"><p class="media-summary has-text-justified">' +
+        '</p><br><div><p class="media-summary has-text-left">' +
         cardsArr[i].summary +
         '</p><br><p class="media-genre">' +
         cardsArr[i].genre +

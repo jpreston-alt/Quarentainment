@@ -20,29 +20,26 @@
 }
 
 #browse-content-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin-right: auto;
     margin-left: auto;
     
 }
 
-
-
-
-/* .media-card {
+.media-card {
     height: 450px;
 }
 .is-scrollable {
-    height: 150px;
+    height: 325px;
     overflow-y: scroll;
 }
 .media-img {
-    max-height: 300px;
-}  */
+    max-height: 325px;
+} 
 
- /* .fixed-bottom {
+.fixed-bottom {
     position: absolute;
     bottom: 0px;
     width: 100%;
-} */
+}
 
