@@ -9,49 +9,61 @@ $(document).ready(function () {
     method: "GET",
   }).then(function (response) {
     for (i = 0; i < response.results.length; i++) {
+      var title = response.results[i].display_title;
+
       var divMovie = $("<p>").html(
-        response.results[i].display_title +
+        title +
           "<br />" +
           response.results[i].mpaa_rating +
           "<br /><img src= '" +
           response.results[i].multimedia.src +
           "'><br/><a href='" +
           response.results[i].link.url +
+          // resultLink +
           "' target='_blank'>Read the Review</a><br/>" +
           response.results[i].summary_short +
           "<br/>"
       );
+
       $("#movieList").append(divMovie);
+      // });
     }
   });
 
-  function getReviewLink(title) {
+  function getReviewLink(title, id) {
     nytMovieSearchUrl =
       nytMoviesUrl +
       "/reviews/search.json?query=" +
       title +
       "&api-key=" +
       nytApiKey;
+
+    results = $.Deferred();
+
     $.ajax({
       url: nytMovieSearchUrl,
       method: "GET",
-      // success: function (responseJSON) {
-      //   console.log(responseJSON);
-      //   return responseJSON;
-      // },
-    }).done(function (response) {
-      var reviewLink = response.results[0].link.url;
-      console.log(reviewLink);
-      console.log(response);
-      return response;
+      dataType: "json",
+    }).done(function (data) {
+      // results.resolve(data);
+      useReviewLink(data, id);
     });
+    return results.promise();
   }
 
-  console.log(getReviewLink("the lion king"));
-  // console.log(getReviewLink("the lion king").responseJSON);
-  // console.log(getReviewLink("the lion king").responseText);
+  // console.log(
+  //   $.when(getReviewLink("the lion king", "searchResult")).then(function (value) {
+  //     console.log(value);
+  //     return value;
+  //   })
+  // );
+  $.when(getReviewLink("the lion king")).then(
+    useReviewLink(response, "searchResult")
+  );
 
-  // var link = getReviewLink("the lion king").responseJSON.results[0].link.url;
-  // console.log(link);
-  // $("#searchResult").attr("href", link);
+  function useReviewLink(data, id) {
+    var link = data.results[0].link.url;
+    console.log(link);
+    $("#" + id).attr("href", link);
+  }
 });
