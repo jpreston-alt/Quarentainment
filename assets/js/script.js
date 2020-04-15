@@ -109,6 +109,7 @@ $(document).ready(function () {
       }
     }
   });
+  
   // event handlers for movies, books, and shows links (from navbar or home page)
   $(".nav-to-movies").on("click", clickMediaType);
   $(".nav-to-books").on("click", clickMediaType);
@@ -201,6 +202,7 @@ function renderMediaCards() {
         '</p></div></div></div><div class="fixed-bottom"><footer class="card-footer"><p class="card-footer-item"><span><a href = "#"> Add to My List</a></span></p>' +
         cardsArr[i].link +
         "</footer></div></div></div >"
+
     );
 
     // append new card element to content container

@@ -17,24 +17,29 @@
 .media-authorOrRating {
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-};
-
-
-/* 
-.media-card {
-    height: 400px;
 }
 
+#browse-content-container {
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+
+/* .media-card {
+    height: 450px;
+}
 .is-scrollable {
-    height: 200px;
+    height: 150px;
     overflow-y: scroll;
 }
-
 .media-img {
     max-height: 300px;
-}
+}  */
 
-.fixed-bottom {
+ /* .fixed-bottom {
     position: absolute;
     bottom: 0px;
     width: 100%;
