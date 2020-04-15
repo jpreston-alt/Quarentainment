@@ -267,7 +267,7 @@ function nytCriticsPicks() {
     for (i = 0; i < response.results.length; i++) {
       title = response.results[i].display_title.toUpperCase();
       authorOrRating = "Rated " + response.results[i].mpaa_rating;
-      score = "";
+      score = '<span id="score' + i + '"></span>';
       imgURL = response.results[i].multimedia.src;
       genre = "";
       summary = response.results[i].summary_short;
@@ -275,7 +275,7 @@ function nytCriticsPicks() {
         '<p class="card-footer-item"><a href = "' +
         response.results[i].link.url +
         '">Read NYT Review</a></p>';
-
+      getTmdbData(title, i);
       // create new MediaCard object with variables
       var card = new MediaCard(
         title,
@@ -292,7 +292,6 @@ function nytCriticsPicks() {
     }
 
     renderMediaCards();
-    console.log(response);
   });
 }
 
@@ -320,6 +319,24 @@ function getNytData(title, id) {
     $("#reviewLink" + id).attr("href", resultsLink);
     $("#reviewLink" + id).html(resultsText);
     $("#rating" + id).html(resultsRating);
+  });
+}
+
+function getTmdbData(title, id) {
+  var searchUrl =
+    "https://api.themoviedb.org/3/search/movie?api_key=660bf8330423e5658590b1cdb677dc08&query=" +
+    title.replace(/\s/g, "%20");
+
+  resultsScore = "";
+
+  $.ajax({
+    url: searchUrl,
+    method: "GET",
+  }).then(function (response) {
+    if (response.results.length >= 1) {
+      resultsScore = response.results[0].vote_average + " / 10";
+    }
+    $("#score" + id).html(resultsScore);
   });
 }
 
@@ -361,7 +378,6 @@ function renderTrendMovieOrTV(type, genreDictionType) {
       } else {
         title = response.results[i].original_name.toUpperCase();
       }
-      console.log(response.results[i].vote_average);
       imgURL =
         "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
       authorOrRating = '<span id="rating' + i + '"></span>';
