@@ -291,7 +291,7 @@ function nytCriticsPicks() {
   });
 }
 
-function getNytReviewLink(title) {
+function getNytReviewLink(title, id) {
   nytMovieSearchUrl =
     nytMoviesUrl +
     "/reviews/search.json?query=" +
@@ -299,12 +299,21 @@ function getNytReviewLink(title) {
     "&api-key=" +
     nytApiKey;
 
+  var resultsLink;
+
   $.ajax({
     url: nytMovieSearchUrl,
     method: "GET",
   }).then(function (data) {
-    console.log(data.results[0].link.url);
-    // return data.results[0].link.url;
+    console.log(title);
+    if (data.results.length >= 1) {
+      resultsLink = data.results[0].link.url;
+    } else {
+      resultsLink = "";
+    }
+    console.log(resultsLink);
+    $("#" + id).attr("href", resultsLink);
+    // return resultsLink;
   });
 }
 
@@ -352,7 +361,11 @@ function renderTrendMovieOrTV(type, genreDictionType) {
       authorOrRating = response.results[i].vote_average + " / 10";
       genre = resString;
       summary = response.results[i].overview;
-      link = getNytReviewLink(title);
+      link =
+        '<p class="card-footer-item"><a id="reviewLink' +
+        i +
+        '" href = "" >Read NYT Review</a></p>';
+      getNytReviewLink(title, "reviewLink" + i);
 
       // create new MediaCard object with variables
       var card = new MediaCard(
