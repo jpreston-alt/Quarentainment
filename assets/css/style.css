@@ -27,14 +27,14 @@
 }
 
 .media-card {
-    height: 450px;
+    height: 300px;
 }
 .is-scrollable {
-    height: 325px;
+    height: 200px;
     overflow-y: scroll;
 }
 .media-img {
-    max-height: 325px;
+    max-height: 200px;
 } 
 
 .fixed-bottom {
@@ -42,4 +42,47 @@
     bottom: 0px;
     width: 100%;
 }
+
+.media-title {
+    font-size: 16px !important;
+}
+
+.media-authorOrRating {
+    font-size: 14px !important;
+    margin-bottom: 0px !important;
+}
+
+.media-summary, .card-footer-item {
+    font-size: 12px !important;
+}
+
+
+
+@media only screen and (min-width: 400px) {
+    .media-card {
+        height: 425px;
+    }
+    .is-scrollable {
+        height: 325px;
+        overflow-y: scroll;
+    }
+    .media-img {
+        max-height: 325px;
+    } 
+    .fixed-bottom {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+    }
+    .media-title {
+        font-size: 24px !important;
+    }
+    .media-authorOrRating {
+        font-size: 1.25rem !important;
+    }
+    .media-summary, .card-footer-item {
+        font-size: 100% !important;
+    }
+}
+
 
