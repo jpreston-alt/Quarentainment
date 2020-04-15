@@ -5,12 +5,13 @@ var listSelection; // genre to be searched for
 var mediaTypeEl = $("#media-type");
 
 // media card object constructor
-function MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary) {
+function MediaCard(title, authorOrRating, imgURL, genre, summary, link) {
     this.title = title;
     this.authorOrRating = authorOrRating;
     this.imgURL = imgURL;
-    this.linkOrGenre = linkOrGenre;
+    this.genre = genre;
     this.summary = summary;
+    this.link = link;
 };
 
 // movie genres
@@ -135,7 +136,7 @@ function getStorage() {
     };
 };
 
-// function for event handler when user clicks on media linkOrGenre
+// function for event handler when user clicks on media genre
 function clickMediaType(type) {
     $('.nav-to-' + type).on("click", function () {
         mediaType = type;
@@ -165,7 +166,7 @@ function renderMediaCards() {
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
 
-        var mediaCardEl = $('<div class="column is-half"><div class= "card media-card"><div class="card-content columns is-mobile"><div class="column"><img src="' + cardsArr[i].imgURL + '" class="media-img"></div><div class="column has-text-centered"><p class="title is-4 media-title">' + cardsArr[i].title + '</p><p class="media-authorOrRating is-italic subtitle">' + cardsArr[i].authorOrRating + '</p><br><div class="is-scrollable"><p class="media-summary">' + cardsArr[i].summary + '</p><br><p class="media-linkOrGenre">' + cardsArr[i].linkOrGenre + '</p></div></div></div><div class="fixed-bottom"><footer class="card-footer"><a href="#" class="card-footer-item add-to-list-btn">Add to My List</a></footer></div></div></div >')
+        var mediaCardEl = $('<div class="column is-half"><div class= "card media-card"><div class="card-content columns is-mobile"><div class="column"><img src="' + cardsArr[i].imgURL + '" class="media-img"></div><div class="column has-text-centered"><p class="title is-4 media-title">' + cardsArr[i].title + '</p><p class="media-authorOrRating is-italic subtitle">' + cardsArr[i].authorOrRating + '</p><br><div class="is-scrollable"><p class="media-summary has-text-justified">' + cardsArr[i].summary + '</p><br><p class="media-genre">' + cardsArr[i].genre + '</p></div></div></div><div class="fixed-bottom"><footer class="card-footer"><p class="card-footer-item"><span><a href = "#"> Add to My List</a></span></p>' + cardsArr[i].link + '</footer></div></div></div >')
 
         // append new card element to content container
         $("#browse-content-container").append(mediaCardEl);
@@ -229,15 +230,18 @@ function nytCriticsPicks() {
         url: nytMovieListUrl,
         method: "GET",
     }).then(function (response) {
+        console.log(response);
         for (i = 0; i < response.results.length; i++) {
-            title = response.results[i].display_title;
+
+            title = response.results[i].display_title.toUpperCase();
             authorOrRating = response.results[i].mpaa_rating;
             imgURL = response.results[i].multimedia.src;
-            linkOrGenre = '<a class="media-linkOrGenre" href="' + response.results[i].link.url + '"target="_blank">Read NYT Review</a>';
+            genre = ""
             summary = response.results[i].summary_short;
+            link = '<p class="card-footer-item"><a href = "' + response.results[i].link.url + '">Read NYT Review</a></p>';
 
             // create new MediaCard object with variables
-            var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
+            var card = new MediaCard(title, authorOrRating, imgURL, genre, summary, link);
 
             // push new MediaCards to cardsArr
             cardsArr.push(card);
@@ -282,18 +286,19 @@ function renderTrendMovieOrTV(type, genreDictionType) {
 
             // save movie data to variables
             if (mediaType === "movies") {
-                title = response.results[i].title;
+                title = response.results[i].title.toUpperCase();
             } else {
-                title = response.results[i].original_name;
+                title = response.results[i].original_name.toUpperCase();
             };
 
             imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
             authorOrRating = response.results[i].vote_average + " / 10";
-            linkOrGenre = resString;
+            genre = resString;
             summary = response.results[i].overview;
+            link = "";
 
             // create new MediaCard object with variables
-            var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
+            var card = new MediaCard(title, authorOrRating, imgURL, genre, summary, link);
 
             // push new MediaCards to cardsArr
             cardsArr.push(card);
@@ -324,11 +329,12 @@ function changeBookCards() {
             title = (bookResponse.results.books[j].title);
             authorOrRating = bookResponse.results.books[j].contributor;
             imgURL = bookResponse.results.books[j].book_image;
-            linkOrGenre = '<a class="media-linkOrGenre" href="' + bookResponse.results.books[j].amazon_product_url + '">Purchase Here</a>'
+            genre = ""
             summary = bookResponse.results.books[j].description;
+            link = '<p class="card-footer-item"><a href = "' + bookResponse.results.books[j].amazon_product_url +'">Purchase</a></p>';
 
             // create new MediaCard object with variables
-            var card = new MediaCard(title, authorOrRating, imgURL, linkOrGenre, summary);
+            var card = new MediaCard(title, authorOrRating, imgURL, genre, summary, link);
 
             // push new MediaCard to cardsArr
             cardsArr.push(card);

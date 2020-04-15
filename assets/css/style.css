@@ -8,7 +8,7 @@
 }
 
 
-.media-linkOrGenre {
+.media-genre {
     font-size: 16px;
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
@@ -19,9 +19,7 @@
     font-style: italic;
 };
 
-.is-4 {
-    margin-bottom: 0px !important;
-}
+
 
 /* 
 .media-card {
