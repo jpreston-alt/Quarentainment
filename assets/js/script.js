@@ -85,9 +85,10 @@ $(document).ready(function () {
     });
 
     // event handlers for movies, books, and shows links (from navbar or home page)
-    clickMediaType("movies");
-    clickMediaType("books");
-    clickMediaType("shows");
+    $('.nav-to-movies').on("click", clickMediaType);
+    $('.nav-to-books').on("click", clickMediaType);
+    $('.nav-to-shows').on("click", clickMediaType);
+    
 
 
     // event handler for when user changes genre on dropdown menu and clicks search button
@@ -137,12 +138,10 @@ function getStorage() {
 };
 
 // function for event handler when user clicks on media genre
-function clickMediaType(type) {
-    $('.nav-to-' + type).on("click", function () {
-        mediaType = type;
-        setStorage();
-        renderTrendBrowsePage();
-    });
+function clickMediaType() {
+    mediaType = $(this).attr("data-type");
+    setStorage();
+    renderTrendBrowsePage();
 };
 
 // function for rendering dropdown menu based on genreList
