@@ -165,7 +165,7 @@ function renderMediaCards() {
         cardsArr[i].imgURL +
         '" class="media-img"></div><div class="column has-text-centered is-scrollable"><p class="title is-4 media-title">' +
         cardsArr[i].title +
-        '</p><p class="media-authorOrRating is-italic subtitle">' +
+        '</p><p class="media-authorOrRating subtitle">' +
         cardsArr[i].authorOrRating +
         '</p><p class="media-score">' +
         cardsArr[i].score +
@@ -218,7 +218,6 @@ function renderTrendBrowsePage() {
       changeBookCards();
     });
 
-
   } else if (mediaType === "movies") {
     mediaTypeEl.text("Trending Movies this Week");
     renderTrendMovieOrTV("movie", genreDictionMovies);
@@ -243,7 +242,7 @@ function nytCriticsPicks() {
     console.log(response);
     for (i = 0; i < response.results.length; i++) {
       title = response.results[i].display_title.toUpperCase();
-      authorOrRating = "Rated " + response.results[i].mpaa_rating;
+      authorOrRating = response.results[i].mpaa_rating;
       score = '<span id="score' + i + '"></span>';
       imgURL = response.results[i].multimedia.src;
       genre = "";
@@ -291,7 +290,7 @@ function getNytData(title, id) {
     if (data.results.length >= 1) {
       resultsLink = data.results[0].link.url;
       resultsText = "Read NYT Review";
-      resultsRating = "Rated " + data.results[0].mpaa_rating;
+      resultsRating = data.results[0].mpaa_rating;
     }
     $("#reviewLink" + id).attr("href", resultsLink);
     $("#reviewLink" + id).html(resultsText);

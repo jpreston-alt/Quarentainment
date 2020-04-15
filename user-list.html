@@ -16,7 +16,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <!-- Our CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" /><link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -70,17 +72,15 @@
     <section class="hero has-text-centered">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title is-1">
-                    My List
-                </h1>
-                <p class="menu-label">
-                    Filter by:
+                <h1 class="title is-1" id="my-list-title">My List</h1>
+                <p class="dropdown-label">
+                    Or Filter by Genre:
                 </p>
                 <h2 class="subtitle"></h2>
-                <div class="field has-addons has-addons-centered">
+                <div class="field has-addons has-addons-centered" id="dropdown-form">
                     <p class="control">
                         <span class="select">
-                            <select>
+                            <select id="my-list-dropdown">
                                 <option>Movies</option>
                                 <option>TV Shows</option>
                                 <option>Books</option>
@@ -88,78 +88,21 @@
                         </span>
                     </p>
                     <p class="control">
-                        <a class="button is-primary">
+                        <a class="button is-primary" id="dropdown-search-btn">
                             <i class="fas fa-search"></i>
                         </a>
                     </p>
                 </div>
-
+    
             </div>
         </div>
     </section>
 
-    <div class="container" id="my-list-container">
-        <div class="container browse-content-card">
-            <div class="columns">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-content columns is-mobile">
-                            <div class="column">
-                                <img src="https://via.placeholder.com/320x480">
-                            </div>
-                            <div class="column">
-                                <p class="title">Title</p>
-                                <p class="subtitle">info</p>
-                                <p class="subtitle">info</p>
-                                <p class="subtitle">info</p>
-                                <p class="subtitle">info</p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <p class="card-footer-item">
-                                <a class="watched-btn">
-                                    Mark as Watched
-                                </a>
-                            </p>
-                            <p class="card-footer-item">
-                                <a class="remove-btn">
-                                    Remove from List
-                                </a>
-                            </p>
-                        </footer>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-content columns is-mobile">
-                            <div class="column">
-                                <img src="https://via.placeholder.com/320x480">
-                            </div>
-                            <div class="column">
-                                <p class="title">Title</p>
-                                <p class="subtitle">info</p>
-                                <p class="subtitle">info</p>
-                                <p class="subtitle">info</p>
-                                <p class="subtitle">info</p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <p class="card-footer-item">
-                                <a class="watched-btn"> 
-                                    Mark as Watched
-                                </a>
-                            </p>
-                            <p class="card-footer-item">
-                                <a class="remove-btn">
-                                    Remove from List
-                                </a>
-                            </p>
-                        </footer>
-                    </div>
-                </div>
+        <div class="container">
+            <div class="columns is-multiline" id="my-list-container">
+                 <!-- my-list-cards go here -->
             </div>
-        </div>
-    </div>
+         </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
