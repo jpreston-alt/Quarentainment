@@ -5,9 +5,10 @@ var listSelection; // genre to be searched for
 var mediaTypeEl = $("#media-type");
 
 // media card object constructor
-function MediaCard(title, authorOrRating, imgURL, genre, summary, link) {
+function MediaCard(title, authorOrRating, score, imgURL, genre, summary, link) {
   this.title = title;
   this.authorOrRating = authorOrRating;
+  this.score = score;
   this.imgURL = imgURL;
   this.genre = genre;
   this.summary = summary;
@@ -192,6 +193,8 @@ function renderMediaCards() {
         cardsArr[i].title +
         '</p><p class="media-authorOrRating is-italic subtitle">' +
         cardsArr[i].authorOrRating +
+        '</p><p class="media-score is-italic subtitle">' +
+        cardsArr[i].score +
         '</p><br><div class="is-scrollable"><p class="media-summary has-text-justified">' +
         cardsArr[i].summary +
         '</p><br><p class="media-genre">' +
@@ -265,7 +268,8 @@ function nytCriticsPicks() {
     console.log(response);
     for (i = 0; i < response.results.length; i++) {
       title = response.results[i].display_title.toUpperCase();
-      authorOrRating = response.results[i].mpaa_rating;
+      authorOrRating = "Rated " + response.results[i].mpaa_rating;
+      score = "";
       imgURL = response.results[i].multimedia.src;
       genre = "";
       summary = response.results[i].summary_short;
@@ -278,6 +282,7 @@ function nytCriticsPicks() {
       var card = new MediaCard(
         title,
         authorOrRating,
+        score,
         imgURL,
         genre,
         summary,
@@ -293,7 +298,7 @@ function nytCriticsPicks() {
   });
 }
 
-function getNytReviewLink(title, id) {
+function getNytData(title, id) {
   nytMovieSearchUrl =
     nytMoviesUrl +
     "/reviews/search.json?query=" +
@@ -301,21 +306,22 @@ function getNytReviewLink(title, id) {
     "&api-key=" +
     nytApiKey;
 
-  var resultsLink;
+  var resultsLink = "";
+  var resultsText = "";
+  var resultsRating = "";
 
   $.ajax({
     url: nytMovieSearchUrl,
     method: "GET",
   }).then(function (data) {
-    console.log(title);
     if (data.results.length >= 1) {
       resultsLink = data.results[0].link.url;
-    } else {
-      resultsLink = "";
+      resultsText = "Read NYT Review";
+      resultsRating = "Rated " + data.results[0].mpaa_rating;
     }
-    console.log(resultsLink);
-    $("#" + id).attr("href", resultsLink);
-    // return resultsLink;
+    $("#reviewLink" + id).attr("href", resultsLink);
+    $("#reviewLink" + id).html(resultsText);
+    $("#rating" + id).html(resultsRating);
   });
 }
 
@@ -357,22 +363,24 @@ function renderTrendMovieOrTV(type, genreDictionType) {
       } else {
         title = response.results[i].original_name.toUpperCase();
       }
-
+      console.log(response.results[i].vote_average);
       imgURL =
         "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
-      authorOrRating = response.results[i].vote_average + " / 10";
+      authorOrRating = '<span id="rating' + i + '"></span>';
+      score = response.results[i].vote_average + " / 10";
       genre = resString;
       summary = response.results[i].overview;
       link =
         '<p class="card-footer-item"><a id="reviewLink' +
         i +
-        '" href = "" >Read NYT Review</a></p>';
-      getNytReviewLink(title, "reviewLink" + i);
+        '" href = "" ></a></p>';
+      getNytData(title, i);
 
       // create new MediaCard object with variables
       var card = new MediaCard(
         title,
         authorOrRating,
+        score,
         imgURL,
         genre,
         summary,
@@ -404,6 +412,7 @@ function changeBookCards() {
       // save data to variables
       title = bookResponse.results.books[j].title;
       authorOrRating = bookResponse.results.books[j].contributor;
+      score = "";
       imgURL = bookResponse.results.books[j].book_image;
       genre = "";
       summary = bookResponse.results.books[j].description;
@@ -416,6 +425,7 @@ function changeBookCards() {
       var card = new MediaCard(
         title,
         authorOrRating,
+        score,
         imgURL,
         genre,
         summary,
