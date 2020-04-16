@@ -328,7 +328,6 @@ $(document).ready(function () {
     mediaTypeEl.text("New York Times Critics' Picks");
     var nytMovieListUrl =
       nytMoviesUrl + "/reviews/picks.json?api-key=" + nytApiKey;
-
     $.ajax({
       url: nytMovieListUrl,
       method: "GET",
