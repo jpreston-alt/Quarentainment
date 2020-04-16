@@ -5,7 +5,6 @@ $(document).ready(function () {
   var listSelection; // genre to be searched for
   var mediaTypeEl = $("#media-type");
   var myListArr;
-
   // media card object constructor
   function MediaCard(
     title,
@@ -94,9 +93,20 @@ $(document).ready(function () {
     });
 
     // event handlers for movies, books, and shows links (from navbar or home page)
-    $(".nav-to-movies").on("click", clickMediaType);
-    $(".nav-to-books").on("click", clickMediaType);
-    $(".nav-to-shows").on("click", clickMediaType);
+    $(".nav-to-list").click(
+      // function for event handler when user clicks on media genre
+      function (event) {
+        event.preventDefault();
+        url = "browse.html";
+        mediaType = $(this).attr("data-type");
+        sessionStorage.setItem("mediaType", mediaType);
+        renderTrendBrowsePage();
+        window.location.href = url;
+      }
+    );
+    // $(".nav-to-movies").on("click", clickMediaType);
+    // $(".nav-to-books").on("click", clickMediaType);
+    // $(".nav-to-shows").on("click", clickMediaType);
 
     // event handler for when user changes genre on dropdown menu and clicks search button
     $("#dropdown-search-btn").on("click", function () {
@@ -129,34 +139,29 @@ $(document).ready(function () {
 
   // sets local storage
   function setStorage() {
-    localStorage.setItem("mediaType", mediaType);
-    localStorage.setItem("listSelection", listSelection);
+    sessionStorage.setItem("mediaType", mediaType);
+    sessionStorage.setItem("listSelection", listSelection);
+    // localStorage.setItem("myList", myListArr);
   }
 
   // pulls from local storage
   function getStorage() {
-    mediaType = localStorage.getItem("mediaType");
+    mediaType = sessionStorage.getItem("mediaType");
     var storageList = localStorage.getItem("listSelection");
     if (
       localStorage.getItem("myList") !== null &&
-      localStorage.getItem("myList") !== undefined
+      localStorage.getItem("myList") !== undefined &&
+      localStorage.getItem("myList") !== "" &&
+      localStorage.getItem("myList") !== "undefined"
     ) {
       myListArr = JSON.parse(localStorage.getItem("myList"));
     } else {
       myListArr = [];
     }
-    console.log(myListArr);
     // if list selection exists
     if (storageList !== null) {
       listSelection = storageList;
     }
-  }
-
-  // function for event handler when user clicks on media genre
-  function clickMediaType() {
-    mediaType = $(this).attr("data-type");
-    setStorage();
-    renderTrendBrowsePage();
   }
 
   // function for rendering dropdown menu based on genreList
@@ -178,6 +183,12 @@ $(document).ready(function () {
   function renderMediaCards() {
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
+      var addDrop;
+      if (mediaType === "mylist") {
+        addDrop = '<a class="btnDrop" href = "#">Remove from My List</a>';
+      } else {
+        addDrop = '<a class="btnSave" href = "#">Add to My List</a>';
+      }
       var mediaCardEl = $(
         '<div class="column is-half"><div id="mediaCard' +
           i +
@@ -193,18 +204,21 @@ $(document).ready(function () {
           cardsArr[i].summary +
           '</p><br><p class="media-genre">' +
           cardsArr[i].genre +
-          '</p></div></div></div><div class="fixed-bottom"><footer class="card-footer"><p class="card-footer-item"><span><a class="btnSave" href = "#"> Add to My List</a></span></p>' +
+          '</p></div></div></div><div class="fixed-bottom"><footer class="card-footer"><p class="card-footer-item"><span>' +
+          addDrop +
+          "</span></p>" +
           cardsArr[i].link +
           "</footer></div></div></div >"
       );
 
       // append new card element to content container
       $("#browse-content-container").append(mediaCardEl);
-
-      //define "Add to My List" click listener
     }
+    //define "Add to My List" click listener
     $(".btnSave").click(function (event) {
-      event.stopPropagation();
+      event.preventDefault();
+      $(event.target).text("Added!");
+      $(event.target).removeClass("btnSave");
       var cardId = "#" + $(event.target).parents()[4].id;
       var saveTitle = $(cardId).find(".title")[0].textContent;
       var saveImgUrl = $(cardId).find(".media-img")[0].src;
@@ -218,18 +232,15 @@ $(document).ready(function () {
       var saveLink =
         '<p class="card-footer-item"><a class="media-link" href = "' +
         saveLinkHref +
-        '">"' +
+        '">' +
         saveLinkText +
-        '"</a></p>';
+        "</a></p>";
 
-      // console.log(cardId);
-      // console.log(saveTitle);
-      // console.log(saveImgUrl);
-      // console.log(saveAuthorOrRating);
-      // console.log(saveScore);
-      // console.log(saveSummary);
-      // console.log(saveGenre);
-      // console.log(saveLink);
+      for (i = 0; i < myListArr.length; i++) {
+        if (saveTitle === myListArr[i].title) {
+          return;
+        }
+      }
 
       var myCard = new MediaCard(
         saveTitle,
@@ -243,6 +254,20 @@ $(document).ready(function () {
       myListArr.push(myCard);
       console.log(myListArr);
       localStorage.setItem("myList", JSON.stringify(myListArr));
+    });
+
+    //define "Remove from My List" click listener
+    $(".btnDrop").click(function (event) {
+      event.preventDefault();
+      var cardId = "#" + $(this).parents()[4].id;
+      var dropTitle = $(cardId).find(".title")[0].textContent;
+      for (i = 0; i < myListArr.length; i++) {
+        if (dropTitle === myListArr[i].title) {
+          myListArr.splice(i, 1);
+          localStorage.setItem("myList", JSON.stringify(myListArr));
+          location.reload(true);
+        }
+      }
     });
   }
 
@@ -276,15 +301,23 @@ $(document).ready(function () {
             genreList.push(listItem);
           }
         }
+        $("#genreDropDown").show();
         renderDropdown();
         changeBookCards();
       });
     } else if (mediaType === "movies") {
       mediaTypeEl.text("Trending Movies");
+      $("#genreDropDown").show();
       renderTrendMovieOrTV("movie", genreDictionMovies);
     } else if (mediaType === "shows") {
       mediaTypeEl.text("Trending TV Shows");
+      $("#genreDropDown").show();
       renderTrendMovieOrTV("tv", genreDictionTV);
+    } else if (mediaType === "mylist") {
+      mediaTypeEl.text("My List");
+      cardsArr = myListArr;
+      $("#genreDropDown").hide();
+      renderMediaCards();
     }
   }
 

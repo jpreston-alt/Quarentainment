@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -10,100 +9,116 @@
     <link rel="stylesheet" href="./assets/css/reset.css" />
 
     <!-- Add Bulma -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
 
     <!-- Font Awesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
 
     <!-- Our CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-
-
-
-</head>
-
-<body class="browse-page">
-
+  <body class="browse-page">
     <!-- NavBar  -->
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="index.html">
-                <h1 class="title is-4">Entertain Me!</h1>
-            </a>
+    <nav
+      class="navbar is-fixed-top"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        <a class="navbar-item" href="index.html">
+          <h1 class="title is-4">Entertain Me!</h1>
+        </a>
 
-            <!-- Hamburger -->
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
+        <!-- Hamburger -->
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
 
-        <!-- Full Width Navbar -->
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item" href="index.html">
-                    Home
-                </a>
-                <a class="navbar-item" href="user-list.html">
-                    My List
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Browse
-                    </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item nav-to-movies" href="browse.html" data-type="movies">
-                            Movies
-                        </a>
-                        <a class="navbar-item nav-to-shows" href="browse.html" data-type="shows">
-                            TV Shows
-                        </a>
-                        <a class="navbar-item nav-to-books" href="browse.html" data-type="books">
-                            Books
-                        </a>
-                    </div>
-                </div>
+      <!-- Full Width Navbar -->
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" data-type="index" href="index.html">
+            Home
+          </a>
+          <a class="navbar-item nav-to-list" data-type="mylist">
+            My List
+          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Browse
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item nav-to-list" data-type="movies">
+                Movies
+              </a>
+              <a class="navbar-item nav-to-list" data-type="shows">
+                TV Shows
+              </a>
+              <a class="navbar-item nav-to-list" data-type="books">
+                Books
+              </a>
             </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <div class="container is-fluid">
-        <section class="hero has-text-centered">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title is-1" id="media-type"></h1>
-                    <h2 class="subtitle dropdown-label">
-                        Filter by Genre:
-                    </h2>
-                    <div class="field has-addons has-addons-centered" id="dropdown-form">
-                        <p class="control">
-                            <span class="select">
-                                <select id="media-dropdown">
-                                    <!-- drop down options go here -->
-                                </select>
-                            </span>
-                        </p>
-                        <p class="control">
-                            <a class="button is-primary" id="dropdown-search-btn">
-                                <i class="fas fa-search"></i>
-                            </a>
-                        </p>
-                    </div>
-                    <hr>
-                </div>
+      <section class="hero has-text-centered">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-1" id="media-type"></h1>
+            <div id="genreDropDown">
+              <h2 class="subtitle dropdown-label">
+                Filter by Genre:
+              </h2>
+              <div
+                class="field has-addons has-addons-centered"
+                id="dropdown-form"
+              >
+                <p class="control">
+                  <span class="select">
+                    <select id="media-dropdown">
+                      <!-- drop down options go here -->
+                    </select>
+                  </span>
+                </p>
+                <p class="control">
+                  <a class="button is-primary" id="dropdown-search-btn">
+                    <i class="fas fa-search"></i>
+                  </a>
+                </p>
+              </div>
+              <hr />
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <div class="container media-container">
-            <div class="columns is-multiline" id="browse-content-container">
-                <!-- <div class="column">
+      <div class="container media-container">
+        <div class="columns is-multiline" id="browse-content-container">
+          <!-- <div class="column">
                     <div class="card">
                         <div class="card-content columns is-mobile">
                             <div class="column">
@@ -139,13 +154,11 @@
                         </footer>
                     </div>
                 </div> -->
-            </div>
         </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
-
-</body>
-
+  </body>
 </html>
