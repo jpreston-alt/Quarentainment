@@ -1,55 +1,113 @@
+/***************** ALL PAGES ****************/
 body {
-    /* light gray */
-    /* background-color: #bebab9; */
-    /* white */
-    /* background-color: #f1f6f9; */
-    /* light pink */
-    /* background-color: #f3cfcf; */ 
-    /* red */
-    /* background-color: #cb706f; */
-    /* dark gray */
-    /* background-color: #494748; */
+    background-color:#f8f5ee;
     font-family: 'Roboto', sans-serif;
-    /* background-color: rgb(240, 252, 240); */
 }
 
-.hero {
-    /* background-color: white; */
-    margin-bottom: 20px;
-    margin-top: 20px;
+.main-content-container {
+    padding-bottom: 100px;
+}
 
+select, .navbar-item, .card-footer-item {
+    font-weight: 300;
 }
 
 
-.title {
+/***************** NAVBAR ****************/
+.navbar {
+    /* border-bottom: .5px solid hsl(171, 91%, 91%); */
+    /* background-color: hsl(171, 74%, 77%); */
+}
+
+.navbar-item:hover, .navbar-link:hover, .navbar-burger:hover {
+    background-color: rgb(250, 250, 250) !important;
+    color: hsl(171, 100%, 41%) !important; 
+}
+
+
+/* .title {
     font-weight: 500;
+    color: white;
+} */
+
+.entertain-me {
+    font-weight: 700;
+    /* color: white; */
+    color: rgb(61, 61, 61);
+}
+
+/***************** HERO ****************/
+.hero {
+    /* background-color: rgb(85, 85, 85); */
+    /* margin-bottom: 20px; */
+    margin-top: 20px;
+    padding-top: 50px;
+}
+
+#dropdown-search-btn {
+    background-color: hsl(171, 74%, 62%)
+}
+
+#dropdown-search-btn:hover {
+    background-color: hsl(171, 100%, 41%)
+}
+
+hr {
+    background-color: hsl(171, 100%, 41%);
+    opacity: .15;
 }
 
 #media-type, #my-list-title, #homepage-title {
     font-weight: 900;
+    color: rgb(61, 61, 61);
 }
 
-.media-summary {
-    font-family: 'Times New Roman', Times, serif;
+#homepage-subtitle {
+    font-weight: lighter;
 }
 
 .dropdown-label {
     font-weight: lighter;
-    text-transform: uppercase;
-    font-size: 16px;
-};
+    /* text-transform: uppercase; */
+    /* font-size: 16px; */
+}
 
+
+/***************** BROWSE PAGE ****************/
 #browse-content-container {
     max-width: 1100px;
     margin-right: auto;
     margin-left: auto;
 }
 
-select, .navbar-item {
-    font-weight: 300;
+
+
+/***************** CARDS ****************/
+a {
+    color: rgb(61, 61, 61);
 }
 
-.media-authorOrRating, .media-score, .media-genre, #homepage-subtitle {
+a:hover {
+    color: white;
+    font-weight: 400;
+}
+
+
+.card-footer-item:hover {
+    color: white;
+    background-color: hsl(171, 74%, 62%) ;
+}
+
+.card {
+    margin-bottom: 17px;
+}
+
+/***************** MEDIA CARDS ****************/
+.media-card {
+    height: 300px;
+}
+
+.media-authorOrRating, .media-score, .media-genre {
     font-weight: lighter;
 }
 
@@ -57,18 +115,14 @@ select, .navbar-item {
     font-size: 14px;
 }
 
-.media-authorOrRating {
-    font-style: italic;
+.media-summary {
+    font-family: 'Open Sans', sans-serif;
 }
 
-.media-card {
-    height: 300px;
-    margin-bottom: 18px;
+.media-summary, .card-footer-item {
+    font-size: 12px !important;
 }
-.is-scrollable {
-    height: 200px;
-    overflow-y: scroll;
-}
+
 .media-img {
     max-height: 200px;
 } 
@@ -87,15 +141,16 @@ select, .navbar-item {
 .media-authorOrRating {
     font-size: 12px !important;
     margin-bottom: 0px !important;
+    font-style: italic;
 }
 
-.media-summary, .card-footer-item {
-    font-size: 12px !important;
+.is-scrollable {
+    height: 200px;
+    overflow-y: scroll;
 }
 
 
-
-
+/***************** CARDS MEDIA QUERY ****************/
 @media only screen and (min-width: 400px) {
     .media-card {
         height: 425px;

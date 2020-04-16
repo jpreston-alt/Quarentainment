@@ -248,7 +248,7 @@ function nytCriticsPicks() {
       genre = "";
       summary = response.results[i].summary_short;
       link =
-        '<p class="card-footer-item"><a href = "' +
+        '<p class="card-footer-item"><a target="_blank" href = "' +
         response.results[i].link.url +
         '">Read NYT Review</a></p>';
       getTmdbData(title, i);
@@ -407,7 +407,7 @@ function changeBookCards() {
       genre = "";
       summary = bookResponse.results.books[j].description;
       link =
-        '<p class="card-footer-item"><a href = "' +
+        '<p class="card-footer-item"><a target="_blank" href = "' +
         bookResponse.results.books[j].amazon_product_url +
         '">Purchase</a></p>';
 
