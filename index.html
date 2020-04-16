@@ -23,10 +23,9 @@
     <!-- Our CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
   </head>
   <body>
     <!-- NavBar  -->
@@ -83,9 +82,10 @@
       </div>
     </nav>
 
+  
     <section class="hero">
       <div class="hero-body">
-        <div class="container is-fluid">
+        <div class="container">
           <h1 class="title is-1" id="homepage-title">
             Entertain Me!
           </h1>
@@ -94,12 +94,12 @@
             home.
           </h2>
         </div>
-        <hr />
-      </div>
+        <br>
+        <hr>
     </section>
 
     <!-- Main Content - cards that link to browsing pages -->
-    <div class="container is-fluid" id="main-content">
+    <div class="container is-fluid main-content-container" id="main-content">
       <div class="columns">
         <div class="column">
           <a class="nav-to-list" data-type="movies">
@@ -141,31 +141,28 @@
                 </p>
               </footer>
             </div>
-          </a>
-        </div>
-        <div class="column">
-          <a class="nav-to-list" data-type="shows">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <img
-                    src="assets/images/tv2.jpg"
-                    alt="TV image. Photo by Glenn Carstens-Peters on Unsplash"
-                  />
-                </figure>
+            </a>
+          </div>
+          <div class="column">
+            <a href="browse.html" class="nav-to-shows" data-type="shows">
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="assets/images/tv2.jpg" alt="TV image. Photo by Glenn Carstens-Peters on Unsplash">
+                  </figure>
+                </div>
+                <footer class="card-footer">
+                  <p class="card-footer-item">
+                    <span>
+                      Browse Trending TV Shows
+                    </span>
+                  </p>
+                </footer>
               </div>
-              <footer class="card-footer">
-                <p class="card-footer-item">
-                  <span>
-                    Browse Trending TV Shows
-                  </span>
-                </p>
-              </footer>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>

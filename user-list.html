@@ -22,13 +22,15 @@
 
     <!-- Our CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
     <!-- NavBar  -->
     <nav
       class="navbar is-fixed-top"
@@ -95,32 +97,32 @@
       </div>
     </nav>
 
-    <div class="container is-fluid">
-      <section class="hero has-text-centered">
+<div class="container is-fluid main-content-container">
+    <section class="hero">
         <div class="hero-body">
-          <div class="container">
-            <h1 class="title is-1" id="my-list-title">My List</h1>
-            <h2 class="subtitle dropdown-label">
-              Filter by Genre:
-            </h2>
-            <div
-              class="field has-addons has-addons-centered"
-              id="dropdown-form"
-            >
-              <p class="control">
-                <span class="select">
-                  <select id="my-list-dropdown">
-                    <option>Movies</option>
-                    <option>TV Shows</option>
-                    <option>Books</option>
-                  </select>
-                </span>
-              </p>
-              <p class="control">
-                <a class="button is-primary" id="dropdown-search-btn">
-                  <i class="fas fa-search"></i>
-                </a>
-              </p>
+            <div class="container">
+                <h1 class="title is-1" id="my-list-title">My List</h1>
+                <h2 class="subtitle dropdown-label">
+                    Browse items that you've saved for later
+                </h2>
+                <div class="field has-addons" id="dropdown-form">
+                    <p class="control">
+                        <span class="select">
+                            <select id="my-list-dropdown">
+                                <option>Movies</option>
+                                <option>TV Shows</option>
+                                <option>Books</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary" id="dropdown-search-btn">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </p>
+                </div>
+                <br>
+                <hr>
             </div>
             <hr />
           </div>

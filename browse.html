@@ -22,23 +22,19 @@
 
     <!-- Our CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
-
+    
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+</head>
 
-  <body class="browse-page">
+<body class="browse-page">
+
     <!-- NavBar  -->
-    <nav
-      class="navbar is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="index.html">
-          <h1 class="title is-4">Entertain Me!</h1>
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+      <a class="navbar-item" href="index.html">
+          <h1 class="title is-4 entertain-me">Entertain Me!</h1>
         </a>
 
         <!-- Hamburger -->
@@ -84,79 +80,42 @@
       </div>
     </nav>
 
-    <div class="container is-fluid">
-      <section class="hero has-text-centered">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title is-1" id="media-type"></h1>
-            <div id="genreDropDown">
-              <h2 class="subtitle dropdown-label">
-                Filter by Genre:
-              </h2>
-              <div
-                class="field has-addons has-addons-centered"
-                id="dropdown-form"
-              >
-                <p class="control">
-                  <span class="select">
-                    <select id="media-dropdown">
-                      <!-- drop down options go here -->
-                    </select>
-                  </span>
-                </p>
-                <p class="control">
-                  <a class="button is-primary" id="dropdown-search-btn">
-                    <i class="fas fa-search"></i>
-                  </a>
-                </p>
-              </div>
-              <hr />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="container media-container">
-        <div class="columns is-multiline" id="browse-content-container">
-          <!-- <div class="column">
-                    <div class="card">
-                        <div class="card-content columns is-mobile">
-                            <div class="column">
-                                <img src="" class="media-img">
-                            </div>
-                            <div class="column">
-                                <p class="title media-title"></p>
-                                <p class="subtitle media-author"></p>
-                                <p class="subtitle media-link"></p>
-                                <p class="subtitle media-summary"></p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item add-to-list-btn">Add to My List</a>
-                        </footer>
+    
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container is-fluid">
+                    <h1 class="title is-1" id="media-type"></h1>
+                    <div id="genreDropDown">
+                    <h2 class="subtitle dropdown-label">
+                        See what's Trending this Week, or Filter by Genre
+                    </h2>
+                    <div class="field has-addons" id="dropdown-form">
+                        <p class="control">
+                            <span class="select">
+                                <select id="media-dropdown">
+                                    <!-- drop down options go here -->
+                                </select>
+                            </span>
+                        </p>
+                        <p class="control">
+                            <a class="button is-primary" id="dropdown-search-btn">
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </p>
                     </div>
+                  </div>
+                    <br>
+                    <hr>
                 </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-content columns is-mobile">
-                            <div class="column">
-                                <img src="" class="media-img">
-                            </div>
-                            <div class="column">
-                                <p class="title media-title"></p>
-                                <p class="subtitle media-author"></p>
-                                <p class="subtitle media-link"></p>
-                                <p class="subtitle media-summary"></p>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item add-to-list-btn">Add to My List</a>
-                        </footer>
-                    </div>
-                </div> -->
+            
+        </section>
+
+        <div class="container is-fluid main-content-container">
+            <div class="columns is-multiline" id="browse-content-container">
+                <!-- media cards go here -->
+            </div>
         </div>
-      </div>
-    </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
