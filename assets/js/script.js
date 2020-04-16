@@ -104,7 +104,7 @@ $(document).ready(function () {
       setStorage();
 
       if (mediaType === "books") {
-        mediaTypeEl.text("Top Selling " + genreSelection);
+        mediaTypeEl.text("Best Selling " + genreSelection);
         changeBookCards();
       } else if (mediaType === "movies") {
         mediaTypeEl.text("Trending Movies: " + genreSelection);
@@ -192,7 +192,7 @@ function renderTrendBrowsePage() {
 
   if (mediaType === "books") {
     listSelection = "hardcover-fiction";
-    mediaTypeEl.text("Top Selling Books this Week");
+    mediaTypeEl.text("Best Selling Books");
 
     // renders dropdown
     var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
@@ -219,10 +219,10 @@ function renderTrendBrowsePage() {
     });
 
   } else if (mediaType === "movies") {
-    mediaTypeEl.text("Trending Movies this Week");
+    mediaTypeEl.text("Trending Movies");
     renderTrendMovieOrTV("movie", genreDictionMovies);
   } else if (mediaType === "shows") {
-    mediaTypeEl.text("Trending TV Shows this Week");
+    mediaTypeEl.text("Trending TV Shows");
     renderTrendMovieOrTV("tv", genreDictionTV);
   }
 }

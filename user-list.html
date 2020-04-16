@@ -25,7 +25,7 @@
 <body>
 
     <!-- NavBar  -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
                 <h1 class="title is-4">Entertain Me!</h1>
@@ -69,14 +69,14 @@
         </div>
     </nav>
 
+<div class="container is-fluid">
     <section class="hero has-text-centered">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-1" id="my-list-title">My List</h1>
-                <p class="dropdown-label">
-                    Or Filter by Genre:
-                </p>
-                <h2 class="subtitle"></h2>
+                <h2 class="subtitle dropdown-label">
+                    Filter by Genre:
+                </h2>
                 <div class="field has-addons has-addons-centered" id="dropdown-form">
                     <p class="control">
                         <span class="select">
@@ -93,7 +93,7 @@
                         </a>
                     </p>
                 </div>
-    
+                <hr>
             </div>
         </div>
     </section>
@@ -103,6 +103,7 @@
                  <!-- my-list-cards go here -->
             </div>
          </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>

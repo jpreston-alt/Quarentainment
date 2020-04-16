@@ -26,11 +26,11 @@
   <body>
 
     <!-- NavBar  -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="index.html">
-          <h1 class="title is-1">Entertain Me!</h1>
-        </a>
+        <!-- <a class="navbar-item" href="index.html">
+          <h1 class="title is-4">Entertain Me!</h1>
+        </a> -->
     
         <!-- Hamburger -->
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -70,15 +70,31 @@
       </div>
     </nav>
 
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-fluid">
+          <h1 class="title is-1" id="homepage-title">
+            Entertain Me!
+          </h1>
+          <h2 class="subtitle" id="homepage-subtitle">
+            Browse for content, save to your list, make the most of your time at home.
+          </h2>
+        </div>
+        <hr>
+      </div>
+    </section>
+
     <!-- Main Content - cards that link to browsing pages -->
-    <div class="container" id="main-content">
+    <div class="container is-fluid" id="main-content">
       <div class="columns">
           <div class="column">
             <a href="browse.html" class="nav-to-movies" data-type="movies">
               <div class="card">
-                <div class="card-content">
-                  <img src="http://www.fillmurray.com/460/300">
-                </div>
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="assets/images/movie.jpg" alt="Movie reel. Photo by Denise Jans on Unsplash">
+                    </figure>
+                  </div>
                 <footer class="card-footer">
                   <p class="card-footer-item">
                     <span>
@@ -90,15 +106,17 @@
             </a>
           </div>
           <div class="column">
-            <a href="browse.html" class="nav-to-shows" data-type="shows">
+            <a href="browse.html" class="nav-to-books" data-type="books">
               <div class="card">
-                <div class="card-content">
-                  <img src="http://www.fillmurray.com/460/300">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="assets/images/books3.jpg" alt="Books Image. Photo by Kaboompics .com from Pexels">
+                  </figure>
                 </div>
                 <footer class="card-footer">
                   <p class="card-footer-item">
                     <span>
-                      Browse Trending TV Shows
+                      Browse Top Selling Books
                     </span>
                   </p>
                 </footer>
@@ -106,15 +124,17 @@
             </a>
           </div>
             <div class="column">
-              <a href="browse.html" class="nav-to-books" data-type="books">
+              <a href="browse.html" class="nav-to-shows" data-type="shows">
                 <div class="card">
-                  <div class="card-content">
-                    <img src="http://www.fillmurray.com/460/300">
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="assets/images/tv2.jpg" alt="TV image. Photo by Glenn Carstens-Peters on Unsplash">
+                    </figure>
                   </div>
                   <footer class="card-footer">
                     <p class="card-footer-item">
                       <span>
-                        Browse Top Selling Books
+                        Browse Trending TV Shows
                       </span>
                     </p>
                   </footer>
