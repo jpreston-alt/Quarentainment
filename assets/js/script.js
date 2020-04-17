@@ -145,10 +145,11 @@ $(document).ready(function () {
         } else if (mediaType === "movies") {
           mediaTypeEl.text("Trending Movies: " + genreSelection);
           numToGenre(genreSelection, genreDictionMovies);
-          changeMovieOrTVCards();
+          changeMovieOrTVCards("movie");
         } else if (mediaType === "shows") {
           mediaTypeEl.text("Trending TV Shows: " + genreSelection);
-          changeMovieOrTVCards();
+          numToGenre(genreSelection, genreDictionTV);
+          changeMovieOrTVCards("tv");
         }
       }
     });
@@ -345,7 +346,7 @@ $(document).ready(function () {
   function nytCriticsPicks() {
     mediaTypeEl.text("New York Times Critics' Picks");
     var nytMovieListUrl =
-      nytMoviesUrl + "/reviews/picks.json?api-key=" + nytApiKey;
+      nytMoviesUrl + "/reviews/picks.json?api-key=88AMoZ75UXmU3TRfoicRwpcK1WWWBhCa";
     $.ajax({
       url: nytMovieListUrl,
       method: "GET",
@@ -543,11 +544,11 @@ $(document).ready(function () {
   }
 
   // change movie cards when genre is switched from dropdown menu
-  function changeMovieOrTVCards() {
+  function changeMovieOrTVCards(type) {
     console.log("changed movies or tv genre");
 
     var genre = genreNum;
-    var genreQuery = "https://api.themoviedb.org/3/discover/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genre;
+    var genreQuery = "https://api.themoviedb.org/3/discover/" + type +"?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genre;
 
     $.ajax({
       url: genreQuery,
@@ -555,17 +556,15 @@ $(document).ready(function () {
     }).then(function (response) {
       console.log(response);
       for (i = 0; i < response.results.length; i++) {
-        title = response.results[i].title.toUpperCase();
+        console.log(response);
+        title = response.results[i].name.toUpperCase();
         authorOrRating = "";
-        score = '<span id="score' + i + '"></span>';
+        score = response.results[i].vote_average + " / 10";
         imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
         genre = "";
         summary = response.results[i].overview;
-        link =
-          '<p class="card-footer-item"><a class="media-link" id="reviewLink' +
-          i +
-          '" href = "" ></a></p>';
-        getNytData(title, i);
+        link = "";
+
         // create new MediaCard object with variables
         var card = new MediaCard(
           title,
