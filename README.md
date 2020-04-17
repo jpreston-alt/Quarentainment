@@ -1,5 +1,4 @@
-# Quarentainment!
-[link](https://jaredhennessy.github.io/Project-1/)
+# Quarentainment! [(link)](https://jaredhennessy.github.io/Project-1/)
 
 ## Project Description
 
