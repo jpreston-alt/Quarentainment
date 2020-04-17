@@ -89,8 +89,8 @@ $(document).ready(function () {
       }
     }
 
-    return (genreNum);
-  };
+    return genreNum;
+  }
 
   // event listeners
   $(document).ready(function () {
@@ -120,9 +120,6 @@ $(document).ready(function () {
         window.location.href = url;
       }
     );
-    // $(".nav-to-movies").on("click", clickMediaType);
-    // $(".nav-to-books").on("click", clickMediaType);
-    // $(".nav-to-shows").on("click", clickMediaType);
 
     // event handler for when user changes genre on dropdown menu and clicks search button
     $("#dropdown-search-btn").on("click", function () {
@@ -236,7 +233,7 @@ $(document).ready(function () {
       event.preventDefault();
       $(event.target).text("Added!");
       $(event.target).removeClass("btnSave");
-      console.log("clicked")
+      console.log("clicked");
       var cardId = "#" + $(event.target).parents()[4].id;
       var saveTitle = $(cardId).find(".title")[0].textContent;
       var saveImgUrl = $(cardId).find(".media-img")[0].src;
@@ -547,18 +544,21 @@ $(document).ready(function () {
     console.log("changed movies or tv genre");
 
     var genre = genreNum;
-    var genreQuery = "https://api.themoviedb.org/3/discover/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genre;
+    var genreQuery =
+      "https://api.themoviedb.org/3/discover/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" +
+      genre;
 
     $.ajax({
       url: genreQuery,
-      method: "GET"
+      method: "GET",
     }).then(function (response) {
       console.log(response);
       for (i = 0; i < response.results.length; i++) {
         title = response.results[i].title.toUpperCase();
-        authorOrRating = "";
-        score = '<span id="score' + i + '"></span>';
-        imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
+        authorOrRating = '<span id="rating' + i + '"></span>';
+        score = response.results[i].vote_average + " / 10";
+        imgURL =
+          "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
         genre = "";
         summary = response.results[i].overview;
         link =
