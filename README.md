@@ -31,4 +31,5 @@ AS a bored content consumer during a pandemic, I would like to visit a site and 
 1. Create localstorage-based functionality to save and display user picks
 1. Finalize page styling
 
+[Presentation](https://docs.google.com/presentation/d/1pvZ3rgUWRPgU2WE8rQapWcu3h80zWPdLR9JtOz9KZ7s/edit?usp=sharing)
 [Google Doc](https://docs.google.com/document/d/1qSXLjNX8n7eSAlZKDSzRrDoXKOSOcxz3vYO1R1BT3Gc/edit?usp=sharing)
