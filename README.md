@@ -6,7 +6,7 @@ We will provide a list of movies, TV shows, and books, based on popularity, crit
 
 ## User Story
 
-AS a bored content consumer during a pandemic, I would like to visit a site and see entertainment options that match my interests. I would like to be able to keep a running list of items
+AS a bored content consumer during a pandemic, I would like to visit a site and see entertainment options that match my interests. I would like to be able to keep a running list of items that interest me to refer back to at a later date.
 
 ## Wireframe
 
