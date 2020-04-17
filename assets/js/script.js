@@ -336,7 +336,8 @@ $(document).ready(function () {
     }
   }
 
-  var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
+  var nytApiSearchKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
+  var nytApiKey = "88AMoZ75UXmU3TRfoicRwpcK1WWWBhCa";
   var nytMoviesUrl = "https://api.nytimes.com/svc/movies/v2";
 
   function nytCriticsPicks() {
@@ -385,7 +386,7 @@ $(document).ready(function () {
       "/reviews/search.json?query=" +
       title +
       "&api-key=" +
-      nytApiKey;
+      nytApiSearchKey;
 
     var resultsLink = "";
     var resultsText = "";
