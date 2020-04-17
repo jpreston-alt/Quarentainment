@@ -1,4 +1,4 @@
-# [Quarentainment!](https://jaredhennessy.github.io/Project-1/)
+# [Quarentainment!](https://jaredhennessy.github.io/Quarentainment/)
 
 ## Project Description
 
@@ -10,7 +10,7 @@ AS a bored content consumer during a pandemic, I would like to visit a site and 
 
 ## Wireframe
 
-![wireframe](./instructions/project_one_wireframe_plus_flow.png)
+![wireframe](./assets/images/project_one_wireframe_plus_flow.png)
 
 ## APIs to be Used:
 
@@ -32,7 +32,8 @@ AS a bored content consumer during a pandemic, I would like to visit a site and 
 1. Finalize page styling
 
 ## Final Product
-![](assets/quarentainment.gif)
 
-[Presentation](https://docs.google.com/presentation/d/1pvZ3rgUWRPgU2WE8rQapWcu3h80zWPdLR9JtOz9KZ7s/edit?usp=sharing) / 
+![](./assets/images/quarentainment.gif)
+
+[Presentation](https://docs.google.com/presentation/d/1pvZ3rgUWRPgU2WE8rQapWcu3h80zWPdLR9JtOz9KZ7s/edit?usp=sharing) /
 [Google Doc](https://docs.google.com/document/d/1qSXLjNX8n7eSAlZKDSzRrDoXKOSOcxz3vYO1R1BT3Gc/edit?usp=sharing)
