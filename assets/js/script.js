@@ -99,6 +99,7 @@ $(document).ready(function () {
         event.preventDefault();
         url = "browse.html";
         mediaType = $(this).attr("data-type");
+        console.log(mediaType);
         sessionStorage.setItem("mediaType", mediaType);
         renderTrendBrowsePage();
         window.location.href = url;

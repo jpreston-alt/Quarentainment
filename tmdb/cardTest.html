@@ -59,12 +59,12 @@
           url: queryTMDB,
           method: "GET"
         }).then(function(response) {
-            console.log(response);
+            // console.log(response);
             var myGenreid = response.results[0].genre_ids;
             var genString = "";
             for (var i = 0; i < myGenreid.length; i++) {
             //     var myGenreid = response.results[0].genre_ids[0]
-            console.log(genreDiction[myGenreid[i]])
+            // console.log(genreDiction[myGenreid[i]])
             genString = genString + ", " + genreDiction[myGenreid[i]];
             }
             resString = genString.substring(2, );
@@ -100,6 +100,20 @@
             // $("#movie-view").text(JSON.stringify(response.results[0].overview));
         });
         });
+
+        var genre = "99"
+        var genreQuery = "https://api.themoviedb.org/3/discover/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genre;
+
+        $.ajax({
+            url: genreQuery,
+            method: "GET"
+        }).then(function(response) {
+            console.loog(response);
+
+        });
+
+
+
     </script>
     
 </body>
