@@ -1,4 +1,4 @@
-# [Quarentainment!](https://jaredhennessy.github.io/Project-1/)
+# [Quarentainment!](https://jaredhennessy.github.io/Quarentainment/)
 
 ## Project Description
 
