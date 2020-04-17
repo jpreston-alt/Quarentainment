@@ -345,7 +345,8 @@ $(document).ready(function () {
   function nytCriticsPicks() {
     mediaTypeEl.text("New York Times Critics' Picks");
     var nytMovieListUrl =
-      nytMoviesUrl + "/reviews/picks.json?api-key=88AMoZ75UXmU3TRfoicRwpcK1WWWBhCa";
+      nytMoviesUrl +
+      "/reviews/picks.json?api-key=88AMoZ75UXmU3TRfoicRwpcK1WWWBhCa";
     $.ajax({
       url: nytMovieListUrl,
       method: "GET",
@@ -547,7 +548,11 @@ $(document).ready(function () {
     console.log("changed movies or tv genre");
 
     var genre = genreNum;
-    var genreQuery = "https://api.themoviedb.org/3/discover/" + type +"?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genre;
+    var genreQuery =
+      "https://api.themoviedb.org/3/discover/" +
+      type +
+      "?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" +
+      genre;
 
     $.ajax({
       url: genreQuery,
@@ -559,7 +564,8 @@ $(document).ready(function () {
         title = response.results[i].name.toUpperCase();
         authorOrRating = "";
         score = response.results[i].vote_average + " / 10";
-        imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
+        imgURL =
+          "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
         genre = "";
         summary = response.results[i].overview;
         if (type === "movie") {
@@ -569,9 +575,8 @@ $(document).ready(function () {
             '" href = "" ></a></p>';
           getNytData(title, i);
         } else {
-          link =
-            '<a class="media-link"></a>';
-        };
+          link = '<a class="media-link"></a>';
+        }
 
         // create new MediaCard object with variables
         var card = new MediaCard(
