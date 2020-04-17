@@ -331,6 +331,7 @@ $(document).ready(function () {
       renderTrendMovieOrTV("tv", genreDictionTV);
     } else if (mediaType === "mylist") {
       mediaTypeEl.text("My List");
+      $("#hero-subtitle").text("Start checking off those favorites");
       cardsArr = myListArr;
       $("#genreDropDown").hide();
       renderMediaCards();
