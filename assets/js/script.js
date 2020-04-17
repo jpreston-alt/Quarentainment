@@ -5,6 +5,8 @@ $(document).ready(function () {
   var listSelection; // genre to be searched for
   var mediaTypeEl = $("#media-type");
   var myListArr;
+  var genreNum;
+
   // media card object constructor
   function MediaCard(
     title,
@@ -77,6 +79,19 @@ $(document).ready(function () {
     10752: "War",
   };
 
+  function numToGenre(str, genreDictionType) {
+    var genreDictionArr = Object.entries(genreDictionType);
+    console.log(genreDictionArr);
+
+    for (var i = 0; i < genreDictionArr.length; i++) {
+      if (str === genreDictionArr[i][1]) {
+        genreNum = genreDictionArr[i][0];
+      }
+    }
+
+    return (genreNum);
+  };
+
   // event listeners
   $(document).ready(function () {
     // event listener for hamburger drop down menu
@@ -129,6 +144,7 @@ $(document).ready(function () {
           changeBookCards();
         } else if (mediaType === "movies") {
           mediaTypeEl.text("Trending Movies: " + genreSelection);
+          numToGenre(genreSelection, genreDictionMovies);
           changeMovieOrTVCards();
         } else if (mediaType === "shows") {
           mediaTypeEl.text("Trending TV Shows: " + genreSelection);
@@ -220,6 +236,7 @@ $(document).ready(function () {
       event.preventDefault();
       $(event.target).text("Added!");
       $(event.target).removeClass("btnSave");
+      console.log("clicked")
       var cardId = "#" + $(event.target).parents()[4].id;
       var saveTitle = $(cardId).find(".title")[0].textContent;
       var saveImgUrl = $(cardId).find(".media-img")[0].src;
@@ -526,10 +543,46 @@ $(document).ready(function () {
   }
 
   // change movie cards when genre is switched from dropdown menu
-  function changeMovieOrTVCards(type) {
+  function changeMovieOrTVCards() {
     console.log("changed movies or tv genre");
 
-    // call data from TMDB to browse by genre
+    var genre = genreNum;
+    var genreQuery = "https://api.themoviedb.org/3/discover/movie?api_key=660bf8330423e5658590b1cdb677dc08&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genre;
+
+    $.ajax({
+      url: genreQuery,
+      method: "GET"
+    }).then(function (response) {
+      console.log(response);
+      for (i = 0; i < response.results.length; i++) {
+        title = response.results[i].title.toUpperCase();
+        authorOrRating = "";
+        score = '<span id="score' + i + '"></span>';
+        imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
+        genre = "";
+        summary = response.results[i].overview;
+        link =
+          '<p class="card-footer-item"><a class="media-link" id="reviewLink' +
+          i +
+          '" href = "" ></a></p>';
+        getNytData(title, i);
+        // create new MediaCard object with variables
+        var card = new MediaCard(
+          title,
+          authorOrRating,
+          score,
+          imgURL,
+          genre,
+          summary,
+          link
+        );
+
+        // push new MediaCards to cardsArr
+        cardsArr.push(card);
+      }
+
+      renderMediaCards();
+    });
   }
 
   // define init function
