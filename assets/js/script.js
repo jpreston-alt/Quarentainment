@@ -561,7 +561,11 @@ $(document).ready(function () {
       console.log(response);
       for (i = 0; i < response.results.length; i++) {
         console.log(response);
-        title = response.results[i].name.toUpperCase();
+        if (type === "movie") {
+          title = response.results[i].title.toUpperCase();
+        } else {
+          title = response.results[i].name.toUpperCase();
+        }
         authorOrRating = "";
         score = response.results[i].vote_average + " / 10";
         imgURL =
