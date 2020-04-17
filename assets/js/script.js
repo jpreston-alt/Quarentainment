@@ -195,6 +195,12 @@ $(document).ready(function () {
   }
 
   function renderMediaCards() {
+    if (cardsArr.length === 0) {
+      $("#browse-content-container")
+        .html("Too many requests! Go have a sandwich, then try again.")
+        .css("color", "red");
+      return;
+    }
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
       var addDrop;
