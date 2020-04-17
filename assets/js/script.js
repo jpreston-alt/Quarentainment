@@ -196,12 +196,6 @@ $(document).ready(function () {
   }
 
   function renderMediaCards() {
-    if (cardsArr.length === 0) {
-      $("#browse-content-container")
-        .html("Too many requests! Go have a sandwich, then try again.")
-        .css("color", "red");
-      return;
-    }
     // create new card elements based on how many objects are in the cardsArray
     for (var i = 0; i < cardsArr.length; i++) {
       var addDrop;
@@ -567,7 +561,16 @@ $(document).ready(function () {
         imgURL = "https://image.tmdb.org/t/p/w300/" + response.results[i].poster_path;
         genre = "";
         summary = response.results[i].overview;
-        link = "";
+        if (type === "movie") {
+          link =
+            '<p class="card-footer-item"><a class="media-link" id="reviewLink' +
+            i +
+            '" href = "" ></a></p>';
+          getNytData(title, i);
+        } else {
+          link =
+            '<a class="media-link"></a>';
+        };
 
         // create new MediaCard object with variables
         var card = new MediaCard(
