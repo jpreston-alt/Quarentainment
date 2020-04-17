@@ -89,8 +89,8 @@ $(document).ready(function () {
       }
     }
 
-    return (genreNum);
-  };
+    return genreNum;
+  }
 
   // event listeners
   $(document).ready(function () {
@@ -120,9 +120,6 @@ $(document).ready(function () {
         window.location.href = url;
       }
     );
-    // $(".nav-to-movies").on("click", clickMediaType);
-    // $(".nav-to-books").on("click", clickMediaType);
-    // $(".nav-to-shows").on("click", clickMediaType);
 
     // event handler for when user changes genre on dropdown menu and clicks search button
     $("#dropdown-search-btn").on("click", function () {
@@ -237,7 +234,7 @@ $(document).ready(function () {
       event.preventDefault();
       $(event.target).text("Added!");
       $(event.target).removeClass("btnSave");
-      console.log("clicked")
+      console.log("clicked");
       var cardId = "#" + $(event.target).parents()[4].id;
       var saveTitle = $(cardId).find(".title")[0].textContent;
       var saveImgUrl = $(cardId).find(".media-img")[0].src;
@@ -340,7 +337,8 @@ $(document).ready(function () {
     }
   }
 
-  var nytApiKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
+  var nytApiSearchKey = "GOOGHDHZGwdBBruE3XTXgj3TIcGoewXU";
+  var nytApiKey = "88AMoZ75UXmU3TRfoicRwpcK1WWWBhCa";
   var nytMoviesUrl = "https://api.nytimes.com/svc/movies/v2";
 
   function nytCriticsPicks() {
@@ -389,7 +387,7 @@ $(document).ready(function () {
       "/reviews/search.json?query=" +
       title +
       "&api-key=" +
-      nytApiKey;
+      nytApiSearchKey;
 
     var resultsLink = "";
     var resultsText = "";
@@ -552,7 +550,7 @@ $(document).ready(function () {
 
     $.ajax({
       url: genreQuery,
-      method: "GET"
+      method: "GET",
     }).then(function (response) {
       console.log(response);
       for (i = 0; i < response.results.length; i++) {
