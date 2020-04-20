@@ -31,6 +31,11 @@ AS a bored content consumer during a pandemic, I would like to visit a site and 
 1. Create localstorage-based functionality to save and display user picks
 1. Finalize page styling
 
+## Contributors 
+1. Joanna Preston
+1. Jared Hennessy
+1. Darryl Williams
+
 ## Final Product
 
 ![](./assets/images/quarentainment.gif)
