@@ -1,8 +1,8 @@
-# [Quarentainment!](https://jaredhennessy.github.io/Quarentainment/)
+# [Quarentainment!](https://jpreston-alt.github.io/Quarentainment/)
 
 ## Project Description
 
-We will provide a list of movies, TV shows, and books, based on popularity, critics picks, and/ or user-selected genre, to the user. The user can then save their picks as a to-do list that they can check off as they go.
+This application allows the user to discover new content to keep them entertained by browsing through lists of books, movies, and TV shows that are trending that week. They are able to browse for content based on popularity, NYT critics picks, and/ or a genre of their choosing. They are provided with info such as author, genre, rating, user score, and a short summary. If they are viewing books they are provided with a link to purchase the item, and if they're viewing movies they are provided with a link to the NYT critics review if available. When they find content they are interested in, and want to remember later on, they can add the item to their personal list. These items are saved locally on their device and they may come back to this list at any time to view content that they've saved. When they've finsihed watching or reading this item, or no longer are interested any more, they may delete it from their list at any time.
 
 ## User Story
 
